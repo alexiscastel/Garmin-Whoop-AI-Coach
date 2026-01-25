@@ -3,12 +3,13 @@ import logging
 from datetime import datetime
 
 from services.ai.ai_settings import AgentRole
+from services.ai.langgraph.schemas import MetricsExpertOutputs
+from services.ai.langgraph.state.training_analysis_state import TrainingAnalysisState
+from services.ai.langgraph.utils.message_helper import normalize_langchain_messages
 from services.ai.model_config import ModelSelector
 from services.ai.tools.plotting import PlotStorage
 from services.ai.utils.retry_handler import AI_ANALYSIS_CONFIG, retry_with_backoff
 
-from ..schemas import MetricsExpertOutputs
-from ..state.training_analysis_state import TrainingAnalysisState
 from .node_base import (
     configure_node_tools,
     create_cost_entry,
@@ -25,26 +26,40 @@ from .tool_calling_helper import handle_tool_calling_in_node
 
 logger = logging.getLogger(__name__)
 
-METRICS_SYSTEM_PROMPT_BASE = """You are a computational sports scientist.
-## Goal
+METRICS_SYSTEM_PROMPT_BASE = """## Goal
 Analyze training metrics and competition readiness with data-driven precision.
 ## Principles
 - Analyze: Focus on load patterns, fitness trends, and readiness.
 - Objectivity: Do not speculate beyond the data.
-- Clarity: Explain complex relationships simply."""
+- Clarity: Explain complex relationships simply.
 
-METRICS_USER_PROMPT = """Analyze the metrics summary to identify patterns and trends.
+## New Metrics Definitions (ACWR V2)
 
-## Inputs
-### Metrics Summary
-{data}
-### Context
-- Competitions: ```json {competitions} ```
-- Date: ```json {current_date} ```
-- Notes: ``` {analysis_context} ```
+You are provided with "ACWR v2" metrics derived from daily training load (sum of activityTrainingLoad per day).
 
-## Task
-Extract insights on training patterns, fitness progression, and readiness.
+### EWMA metrics (smooth, responsive)
+- **Acute EWMA (7d)**: short-term load (fatigue proxy).
+- **Chronic EWMA (28d)**: longer-term load (fitness/preparedness proxy).
+- **Shifted Chronic EWMA (t-7)**: chronic EWMA evaluated 7 days earlier (approximate uncoupling).
+- **ACWR (EWMA shifted)**: Acute EWMA / Shifted Chronic EWMA. Use as a spike indicator, but note thresholds require calibration.
+- **Risk Index**: ln(ACWR) (symmetric measure of “doubling vs halving”).
+- **TSB**: Chronic EWMA - Acute EWMA (negative = accumulating fatigue).
+- **Ramp Rate (7d)**: change in Chronic EWMA vs 7 days ago (detects fast load increases).
+- **Monotony (7d)**: mean(daily load over last 7d) / SD(last 7d). High values indicate low variation.
+- **Strain (7d)**: (total weekly load) x Monotony.
+
+Note: Thresholds are heuristics and should be calibrated to the athlete and to the chosen ACWR definition.
+
+### Rolling-sum metrics (Garmin-comparable scale)
+These use 7-day rolling sums (closer to Garmin's magnitude, though Garmin may weight days differently):
+- **Acute 7d Sum**: sum of daily loads over last 7 days (Garmin-like acute magnitude).
+- **Chronic 28d Avg (of Acute 7d Sum)**: average of the last 28 values of Acute 7d Sum (smoothed baseline).
+- **ACWR 7d/28d (coupled)**: Acute 7d Sum / Chronic 28d Avg.
+- **ACWR 7d/28d (uncoupled)**: Acute 7d Sum / Chronic 28d Avg computed up to (t-7), excluding the most recent week (preferred for Garmin-like ACWR without coupling).
+"""
+
+METRICS_USER_PROMPT = """## Task
+Analyze the metrics summary to identify patterns and trends.
 
 ## Constraints
 - Focus on **global training metrics** (load, VO2max, status).
@@ -52,28 +67,45 @@ Extract insights on training patterns, fitness progression, and readiness.
 - Do NOT infer internal physiology (Physiology Expert's job).
 - Focus on **how the training stimulus behaves over time**.
 
+## Inputs
+### Metrics Summary
+{data}
+### Context
+- Competitions: ```json {competitions} ```
+- Date: ```json {current_date} ```
+- **User Context**: ``` {analysis_context} ```
+
 ## Output Requirements
-Produce 3 structured fields:
+Produce 3 structured fields. For EACH field, use this internal layout:
+- **Signals**: what changed (concise)
+- **Evidence**: numbers + date ranges
+- **Implications**: constraints/opportunities for this receiver
+- **Uncertainty**: gaps/low coverage if any
+
+**Important**: Tailor content for each consumer.
 
 ### 1. `for_synthesis` (Comprehensive Report)
-- **Readiness Score (0-100)**.
-- **Story**: Load behavior, fitness trends, risks/opportunities.
-- Focus on patterns and relationships.
+- **Context**: This provides the **"Quantitative Backbone"** (load/stress reality) for the report.
+- **Goal**: Provide the quantitative truth of training load.
+- **Freedom**: Highlight load behavior, fitness trends, or important ratios.
 
 ### 2. `for_season_planner` (12-24 Weeks)
-- **Planner Signal**: High-level guidance on load capacity, volatility, and structural patterns.
-- **Analysis**: Justification based on load history and fitness metrics.
-- Goal: Give the planner a map of the athlete's capacity.
+- **Context**: This informs **"Load Architecture"** (ramp rates, volume ceilings) for the season.
+- **Goal**: Provide high-level guidance on capacity and structural patterns.
+- **Freedom**: Identify safe ramp rates, max sustainable chronic load, or volatility limits.
 
 ### 3. `for_weekly_planner` (Next 28 Days)
-- **Planner Signal**: Current load situation (acute vs chronic), directional guidance (push/hold/pull back), short-term risks.
-- **Analysis**: Summary of last 14 days.
-- **CRITICAL**: Do NOT prescribe specific workouts.
+- **Context**: This acts as the **"Acute Load Guardrail"** for the next few weeks.
+- **Goal**: Provide immediate load guidance and limits.
+- **Freedom**: Define safety limits, push/pull signals, or specific load targets.
+- **CRITICAL**: Do NOT prescribe specific workouts. Provide limits and load guidance."""
 
-**Important**: Tailor content for each consumer. BE CONCISE."""
-
-
-
+METRICS_FINAL_CHECKLIST = """
+## Final Checklist
+- Use Signals/Evidence/Implications/Uncertainty per receiver.
+- Stay within metrics domain only.
+- No prescriptions for specific workouts.
+"""
 
 async def metrics_expert_node(state: TrainingAnalysisState) -> dict[str, list | str | dict]:
     logger.info("Starting metrics expert analysis node")
@@ -81,10 +113,11 @@ async def metrics_expert_node(state: TrainingAnalysisState) -> dict[str, list | 
     plot_storage = PlotStorage(state["execution_id"])
     plotting_enabled = state.get("plotting_enabled", False)
     hitl_enabled = state.get("hitl_enabled", True)
-    
+
     logger.info(
-        f"Metrics expert: Plotting {'enabled' if plotting_enabled else 'disabled'}, "
-        f"HITL {'enabled' if hitl_enabled else 'disabled'}"
+        "Metrics expert: Plotting %s, HITL %s",
+        "enabled" if plotting_enabled else "disabled",
+        "enabled" if hitl_enabled else "disabled",
     )
 
     tools = configure_node_tools(
@@ -94,39 +127,36 @@ async def metrics_expert_node(state: TrainingAnalysisState) -> dict[str, list | 
     )
 
     system_prompt = (
-        METRICS_SYSTEM_PROMPT_BASE +
-        get_workflow_context("metrics") +
-        (get_plotting_instructions("metrics") if plotting_enabled else "") +
-        (get_hitl_instructions("metrics") if hitl_enabled else "")
+        get_workflow_context("metrics")
+        + METRICS_SYSTEM_PROMPT_BASE
+        + (get_plotting_instructions("metrics") if plotting_enabled else "")
+        + (get_hitl_instructions("metrics") if hitl_enabled else "")
+        + METRICS_FINAL_CHECKLIST
     )
 
     base_llm = ModelSelector.get_llm(AgentRole.METRICS_EXPERT)
-    
+
     llm_with_tools = base_llm.bind_tools(tools) if tools else base_llm
     llm_with_structure = llm_with_tools.with_structured_output(MetricsExpertOutputs)
 
     agent_start_time = datetime.now()
 
     async def call_metrics_with_tools():
-        qa_messages_raw = state.get("metrics_expert_messages", [])
-        qa_messages = []
-        for msg in qa_messages_raw:
-            if hasattr(msg, "type"):  # LangChain message object
-                role = "assistant" if msg.type == "ai" else "user"
-                qa_messages.append({"role": role, "content": msg.content})
-            else:  # Already a dict
-                qa_messages.append(msg)
-        
+        qa_messages = normalize_langchain_messages(state.get("metrics_expert_messages", []))
+
         base_messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": METRICS_USER_PROMPT.format(
-                data=state.get("metrics_summary", "No metrics summary available"),
-                competitions=json.dumps(state["competitions"], indent=2),
-                current_date=json.dumps(state["current_date"], indent=2),
-                analysis_context=state["analysis_context"],
-            )},
+            {
+                "role": "user",
+                "content": METRICS_USER_PROMPT.format(
+                    data=state.get("metrics_summary", "No metrics summary available"),
+                    competitions=json.dumps(state["competitions"], indent=2),
+                    current_date=json.dumps(state["current_date"], indent=2),
+                    analysis_context=state["analysis_context"],
+                ),
+            },
         ]
-        
+
         return await handle_tool_calling_in_node(
             llm_with_tools=llm_with_structure,
             messages=base_messages + qa_messages,
@@ -141,9 +171,9 @@ async def metrics_expert_node(state: TrainingAnalysisState) -> dict[str, list | 
         logger.info("Metrics expert analysis completed")
 
         execution_time = (datetime.now() - agent_start_time).total_seconds()
-        
+
         plots, plot_storage_data, available_plots = create_plot_entries("metrics", plot_storage)
-        
+
         log_node_completion("Metrics expert analysis", execution_time, len(available_plots))
 
         return {

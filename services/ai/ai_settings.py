@@ -24,12 +24,12 @@ class AISettings:
             AIMode.STANDARD: {
                 AgentRole.SUMMARIZER: "gpt-5",
                 AgentRole.FORMATTER: "gpt-5",
-                AgentRole.METRICS_EXPERT: "gpt-5",
-                AgentRole.PHYSIOLOGY_EXPERT: "gpt-5",
-                AgentRole.ACTIVITY_EXPERT: "gpt-5",
+                AgentRole.METRICS_EXPERT: "gpt-5-search",
+                AgentRole.PHYSIOLOGY_EXPERT: "gpt-5-search",
+                AgentRole.ACTIVITY_EXPERT: "gpt-5-search",
                 AgentRole.SYNTHESIS: "gpt-5",
-                AgentRole.WORKOUT: "gpt-5",
-                AgentRole.SEASON_PLANNER: "gpt-5",
+                AgentRole.WORKOUT: "gpt-5-search",
+                AgentRole.SEASON_PLANNER: "gpt-5-search",
             },
             AIMode.COST_EFFECTIVE: {
                 AgentRole.SUMMARIZER: "claude-3-haiku",
@@ -50,6 +50,16 @@ class AISettings:
                 AgentRole.SYNTHESIS: "claude-4",
                 AgentRole.WORKOUT: "claude-4",
                 AgentRole.SEASON_PLANNER: "claude-4",
+            },
+            AIMode.PRO: {
+                AgentRole.SUMMARIZER: "gpt-5",
+                AgentRole.FORMATTER: "gpt-5",
+                AgentRole.METRICS_EXPERT: "gpt-5.2-pro-search",
+                AgentRole.PHYSIOLOGY_EXPERT: "gpt-5.2-pro-search",
+                AgentRole.ACTIVITY_EXPERT: "gpt-5.2-pro-search",
+                AgentRole.SYNTHESIS: "gpt-5-search",
+                AgentRole.WORKOUT: "gpt-5.2-pro-search",
+                AgentRole.SEASON_PLANNER: "gpt-5.2-pro-search",
             },
         }
     )

@@ -1,6 +1,6 @@
 [project]
 name = "garmin-ai-coach"
-version = "2.0.0"
+version = "2.2.0"
 description = "CLI tool for Garmin data analysis with AI-powered insights"
 authors = ["Leon Zajchowski <l.zajchowski@web.de>"]
 channels = ["conda-forge"]
@@ -39,6 +39,8 @@ flake8 = ">=7.3.0, <8"
 mypy = ">=1.18.2, <2"
 ruff = ">=0.14.1, <0.15"
 vulture = ">=2.14, <3"
+types-PyYAML = "*"
+types-requests = "*"
 
 [tasks]
 # Development tasks

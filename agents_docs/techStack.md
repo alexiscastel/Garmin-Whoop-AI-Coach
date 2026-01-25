@@ -10,32 +10,30 @@
 
 ### Supported Models
 - **Anthropic Claude** - claude-sonnet-4, claude-opus-4, claude-3-haiku (with extended thinking support)
-- **OpenAI** - gpt-5, gpt-5-mini, gpt-4o, o1, o3, o4-mini
+- **OpenAI** - gpt-5, gpt-5.2-pro, gpt-5-mini, gpt-5-search, gpt-5.2-pro-search (with web search), gpt-4o, o1, o3, o4-mini
 - **OpenRouter/DeepSeek** - deepseek-chat, deepseek-r1, deepseek-v3.2-exp (with reasoning support)
 
 ### Model Assignment Strategy
 
-The system uses a **role-based model assignment strategy** that optimizes model selection based on task requirements:
+The system uses a **role-based model assignment strategy** that optimizes model selection based on task requirements. Specific models can be configured based on the desired mode of operation.
 
-**STANDARD Mode (Production):**
-- **Data Summarization Nodes**: `claude-4-thinking` - Uses extended thinking for complex data structuring
-  - Metrics Summarizer (`AgentRole.ACTIVITY_SUMMARIZER`)
-  - Physiology Summarizer (`AgentRole.ACTIVITY_SUMMARIZER`)
-  - Activity Summarizer (`AgentRole.ACTIVITY_SUMMARIZER`)
-- **HTML Formatters**: `claude-4` - Fast, clean HTML generation without thinking overhead
-  - Analysis Formatter (`AgentRole.FORMATTER`)
-  - Planning Formatter (`AgentRole.FORMATTER`)
-- **Expert Nodes**: `gpt-5` - Advanced reasoning with Responses API (high verbosity, high reasoning effort)
-  - Metrics Expert (`AgentRole.METRICS`)
-  - Physiology Expert (`AgentRole.PHYSIO`)
-- **Other Nodes**: `gpt-5` - Consistent high-quality output
-  - Activity Interpreter, Synthesis, Workout Planning, Competition Planning, Season Planning
+**Key Roles & Capabilities:**
 
-**COST_EFFECTIVE Mode:**
-- All nodes use `claude-3-haiku` for budget-conscious operation
+- **Data Summarization Nodes**: Uses models with **extended reasoning capabilities** (e.g., "thinking" models) for complex data structuring and pattern recognition.
+  - Metrics, Physiology, and Activity Summarizers
+- **HTML Formatters**: Uses **high-speed, efficient models** for clean HTML generation without the overhead of extended reasoning.
+  - Analysis and Planning Formatters
+- **Expert Nodes**: Uses **advanced reasoning models**, often equipped with **web search capabilities**, to provide deep, grounded analysis.
+  - Metrics, Physiology, and Activity Experts
+- **Planning Nodes**: Uses **research-capable models** with access to the latest methodologies via web search to generate actionable training plans.
+  - Workout and Season Planners
+- **Synthesis & Coordination**: Uses **high-fidelity models** to ensure consistent, high-quality final outputs.
 
-**DEVELOPMENT Mode:**
-- All nodes use `claude-4` for fast iteration and testing
+**Operation Modes:**
+- **STANDARD (Production)**: Balances reasoning depth with performance, utilizing "thinking" models for complex tasks and faster models for formatting.
+- **COST_EFFECTIVE**: Prioritizes budget-friendly models (e.g., smaller, faster variants) across all nodes.
+- **DEVELOPMENT**: optimized for fast iteration and testing cycles.
+- **PRO**: Maximum performance mode using GPT-5.2 Pro with web search for expert nodes (metrics, physiology, activity) and planners (season, weekly), with standard GPT-5.2 for other nodes. ⚠️ **High cost mode** (>$10 per run depending on data volume).
 
 ### AI Orchestration & Observability
 - **LangGraph 1.0+** - State-based workflow orchestration ✅ **ACTIVE**

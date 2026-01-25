@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2026-01-25
+
+### Added
+
+#### Model Support
+- **GPT-5.2 Pro**: Added Responses API configuration with `xhigh` reasoning effort (available for future assignment).
+
+#### Expert Output Structure
+- **Structured receiver payloads**: Experts now return per-receiver fields as typed `signals`, `evidence`, `implications`, `uncertainty` payloads (instead of free-form strings).
+- **Prompt-ready rendering**: Structured payloads are rendered into consistent markdown sections for downstream planners/synthesis.
+
+### Improved
+
+#### Prompt Information Flow
+- Summarizer prompts now allow transparent compression (coverage headers, core tables, change points, data quality notes) to reduce noise while preserving decision-relevant metrics.
+- Expert prompts enforce a common internal layout (Signals/Evidence/Implications/Uncertainty) and reordered prompt components for better salience and fewer contradictions.
+- HITL instructions now reference the correct `output` schema for questions.
+
+#### Web Search Capabilities
+- **New `gpt-5-search` model**: GPT-5.2 with OpenAI's hosted web search tool for real-time information retrieval
+- Web search runs during the model's reasoning chain-of-thought (agentic search)
+- Sources automatically included via `include: ["web_search_call.action.sources"]`
+- Fully compatible with structured JSON output and Pydantic models
+- Enabled for expert nodes (Metrics, Physiology, Activity) and planners (Workout, Season) in STANDARD mode
+
+#### Long-Term Fitness Trends
+- **Long-term VO2 max tracking**: Weekly sampling over 360 days to capture year-long fitness evolution
+- **Long-term chronic training load**: Historical training load trend at configurable intervals
+- New `ExtractionConfig` options: `include_long_term_trends`, `long_term_range`, `long_term_interval`
+- AI metrics summarizer now receives long-term trend data for deeper analysis
+
+#### ACWR v2 Implementation
+- **Enhanced Load Calculation**: Replaced basic Garmin metrics with a robust **Acute:Chronic Workload Ratio (v2)** model
+- **Multiple Interpretations**:
+  - **EWMA (Scientific)**: Exponentially Weighted Moving Average (7d/28d) for physiological accuracy
+  - **Rolling Sum (Garmin-like)**: 7-day rolling sums for direct comparison with Garmin reports
+- **Uncoupled Chronic Load**: Chronic load calculation excluding the acute period (t-7) to prevent "mathematically coupled" spike masking
+- **Advanced Physiological Signals**:
+  - **Ramp Rate**: 7-day change in chronic load
+  - **Monotony & Strain**: Variation and stress indices to detectstaleness/overtraining
+  - **TSB (Training Stress Balance)**: Form measurement (chronic - acute)
+- **Robustness**: Timezone-aware date parsing (UTC) and multisport double-counting prevention
+
+#### Codebase Health
+- **Strict Type Checking**: Achieved 100% `mypy` compliance (0 errors) across the entire codebase.
+    - Added comprehensive type annotations to `GarminConnectClient` and `DataExtractor`.
+    - Resolved `MutableMapping` vs `Mapping` conflicts in orchestration layers.
+    - Enforced `None` safety checks for all optional API responses.
+- **Linting & Code Style**: Enforced strict `ruff` linting rules, removing unused code, dead branches, and unsafe global variables.
+- **Test Stability**:
+    - Fixed flaky tests in `test_data_extractor` and `outside_client`.
+    - Added strict type assertions to test suites to catch regression errors early.
+- **CI/CD**: Added mandatory type checking (`pixi run type-check`) to CI pipeline.
+
+---
+
 ## [2.1.0] - 2025-11-22
 
 ### Added
