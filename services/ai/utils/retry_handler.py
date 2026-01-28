@@ -36,7 +36,7 @@ class RetryConfig:
         self.exponential_base = exponential_base
         self.jitter = jitter
         self.retryable_exceptions = retryable_exceptions or {
-            anthropic.APIStatusError,
+            anthropic.OverloadedError,
             anthropic.RateLimitError,
             APIOverloadError,
         }
@@ -78,18 +78,9 @@ async def retry_with_backoff(
 
             is_retryable = any(isinstance(e, exc_type) for exc_type in config.retryable_exceptions)
 
-            if isinstance(e, anthropic.APIStatusError):
-                error_type = (
-                    getattr(e.body, "error", {}).get("type", "") if hasattr(e, "body") else ""
-                )
-                if error_type in ["overloaded_error", "rate_limit_error"]:
-                    is_retryable = True
-                    logger.warning("%s failed with %s: %s", context, error_type, e)
-                else:
-                    logger.error("%s failed with non-retryable API error: %s", context, e)
-                    break
-
-            if not is_retryable:
+            if is_retryable:
+                logger.warning("%s failed with retryable %s: %s", context, type(e).__name__, e)
+            else:
                 logger.error("%s failed with non-retryable error: %s", context, e)
                 break
 
@@ -137,23 +128,3 @@ AI_ANALYSIS_CONFIG = RetryConfig(
 )
 
 QUICK_RETRY_CONFIG = RetryConfig(max_retries=2, base_delay=0.5, max_delay=10.0)
-
-
-def is_anthropic_overload_error(exception: Exception) -> bool:
-    return (
-        isinstance(exception, anthropic.APIStatusError)
-        and hasattr(exception, "body")
-        and hasattr(exception.body, "error")
-        and exception.body.error.get("type", "") == "overloaded_error"
-    )
-
-
-def get_error_details(exception: Exception) -> str:
-    if (
-        isinstance(exception, anthropic.APIStatusError)
-        and hasattr(exception, "body")
-        and hasattr(exception.body, "error")
-    ):
-        error_info = exception.body.error
-        return f"{error_info.get('type', 'unknown')}: {error_info.get('message', str(exception))}"
-    return str(exception)
