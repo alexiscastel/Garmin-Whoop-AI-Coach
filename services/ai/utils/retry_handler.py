@@ -6,6 +6,7 @@ from functools import wraps
 from typing import Any
 
 import anthropic
+from anthropic._exceptions import DeadlineExceededError, OverloadedError, ServiceUnavailableError
 from langgraph.errors import GraphInterrupt
 
 logger = logging.getLogger(__name__)
@@ -36,9 +37,15 @@ class RetryConfig:
         self.exponential_base = exponential_base
         self.jitter = jitter
         self.retryable_exceptions = retryable_exceptions or {
-            anthropic.OverloadedError,
-            anthropic.RateLimitError,
-            APIOverloadError,
+            anthropic.RateLimitError,  # 429 - rate limits
+            anthropic.ConflictError,  # 409 - conflicts
+            anthropic.InternalServerError,  # 5xx - server errors
+            ServiceUnavailableError,  # 503 - service unavailable
+            DeadlineExceededError,  # 504 - gateway timeout
+            OverloadedError,  # 529 - overloaded
+            anthropic.APIConnectionError,  # Network/connection issues
+            anthropic.APITimeoutError,  # Timeouts
+            APIOverloadError,  # Custom local exception
         }
 
     def calculate_delay(self, attempt: int) -> float:
