@@ -147,6 +147,8 @@ class RecoveryIndicators:
     date: str | None = None
     sleep: dict[str, Any] | None = None  # Complex nested structure
     stress: dict[str, Any] | None = None  # Complex nested structure
+    recovery: dict[str, Any] | None = None  # WHOOP-style recovery structure
+    day_strain: float | None = None
 
 
 @dataclass

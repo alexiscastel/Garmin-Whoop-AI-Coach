@@ -13,8 +13,28 @@ context:
     diversifying my activities with combining strength, running, and some biking.
 
   planning: |
+    ## Start Date
+    Plan should start on **Monday, 2026-03-09**. However, if needed, the plan can start with a rest day.
+    
+    ## Strength training constraint
+    This plan has to work with a strength training plan provided by TrainWell.
+    The strength plan is the following:
+      - Tuesdays: whole body workout
+      - Thursdays: leg workout
+      - Saturdays: upper body workout
+    Each strength workout lasts about 45 minutes. Having a strength workout does not prevent me from running/biking.
+    
+    ## General information
     Next trail race is a 10k in 3 weeks, half marathon 3 weeks after that.
     Priority is rebuilding aerobic base and improving run endurance.
+    Long run is preferred on Sundays.
+    
+    ## Training Zones
+    | Discipline | Base Metric                  |
+    |------------|------------------------------|
+    | Running    | LTHR ≈ 174 bpm / 7:40 min/mi |
+    | Cycling    | FTP ≈ 274W                   |
+    | Heart Rate | Max HR ≈ 193 bpm             |
 
 # Data Extraction Settings
 extraction:
@@ -22,7 +42,7 @@ extraction:
   metrics_days: 56         # How many days of metrics to extract
   ai_mode: "standard"      # Overrides .env AI_MODE for coach-cli runs; one of: "development", "standard", "cost_effective", "pro"
                            # ⚠️  WARNING: "pro" mode can incur high costs (>$10 per run depending on data volume)
-  enable_plotting: false  # Enable AI-generated plots (default: false to save costs). Set to true for visual insights.
+  enable_plotting: true   # Enable AI-generated plots (default: false to save costs). Set to true for visual insights.
   hitl_enabled: true       # Enable Human-in-the-Loop interactions - agents can ask questions during analysis (default: true)
   skip_synthesis: false    # Skip synthesis and formatter nodes (default: false). Set to true to save tokens when you only need the weekly plan.
   
@@ -39,7 +59,7 @@ competitions:
     priority: "C"              # A (highest), B, C priorities
     target_time: "00:51:45"    # HH:MM:SS format
 
-  - name: "Dirty Dash - Half Marathon trail race""
+  - name: "Dirty Dash - Half Marathon trail race"
     date: "2026-04-18"
     race_type: "Trail half Marathon"
     priority: "B"
@@ -101,14 +121,6 @@ competitions:
 # Output Settings
 output:
   directory: "./data"
-
-# Optional: WHOOP Recovery Integration
-whoop:
-  enabled: false
-  client_id: ""            # Optional: falls back to WHOOP_CLIENT_ID
-  client_secret: ""        # Optional: falls back to WHOOP_CLIENT_SECRET
-  redirect_uri: "http://localhost:1234"
-  token_path: "~/.whoop/garmin-ai-coach.json"
 
 # Optional: Garmin Credentials (leave empty to use interactive login)
 credentials:

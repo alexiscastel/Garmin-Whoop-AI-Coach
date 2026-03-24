@@ -16,12 +16,14 @@ import yaml
 
 from core.config import reload_config
 from services.ai.ai_settings import ai_settings
-from services.ai.langgraph.workflows.planning_workflow import (
-    run_complete_analysis_and_planning,
-)
 from services.ai.utils.plan_storage import FilePlanStorage
 from services.garmin import ExtractionConfig, TriathlonCoachDataExtractor
 from services.outside.client import OutsideApiGraphQlClient
+from services.whoop import (
+    WhoopConfiguration,
+    WhoopRecoveryExtractor,
+    merge_whoop_into_garmin_data,
+)
 
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -72,6 +74,16 @@ class ConfigParser:
             "hitl_enabled": self.config.get("extraction", {}).get("hitl_enabled", True),
             "skip_synthesis": self.config.get("extraction", {}).get("skip_synthesis", False),
         }
+
+    def get_whoop_config(self) -> WhoopConfiguration:
+        raw = self.config.get("whoop", {}) if isinstance(self.config.get("whoop"), dict) else {}
+        return WhoopConfiguration(
+            enabled=bool(raw.get("enabled", False)),
+            client_id=str(raw.get("client_id") or os.getenv("WHOOP_CLIENT_ID") or ""),
+            client_secret=str(raw.get("client_secret") or os.getenv("WHOOP_CLIENT_SECRET") or ""),
+            redirect_uri=str(raw.get("redirect_uri") or "http://localhost:1234"),
+            token_path=str(raw.get("token_path") or "~/.whoop/garmin-ai-coach.json"),
+        )
 
     def get_competitions(self) -> list[dict[str, Any]]:
         competitions = self.config.get("competitions", [])
@@ -180,11 +192,33 @@ def _save_plan_outputs(output_dir: Path, result: dict[str, Any]) -> list[str]:
     return files_generated
 
 
+def _can_prompt_user() -> bool:
+    return bool(sys.stdin and sys.stdin.isatty())
+
+
+def _should_continue_without_whoop(exc: Exception) -> bool:
+    if not _can_prompt_user():
+        logger.warning("WHOOP failed in non-interactive mode; continuing with Garmin-only data")
+        return True
+
+    answer = input(
+        f"WHOOP integration failed ({exc}). Continue with Garmin-only data? [y/N]: "
+    ).strip().lower()
+    return answer in {"y", "yes"}
+
+
+async def _run_complete_analysis_and_planning(**kwargs: Any) -> dict[str, Any]:
+    from services.ai.langgraph.workflows.planning_workflow import run_complete_analysis_and_planning
+
+    return await run_complete_analysis_and_planning(**kwargs)
+
+
 async def run_analysis_from_config(config_path: Path) -> None:
     config_parser = ConfigParser(config_path)
     athlete_name, email = config_parser.get_athlete_info()
     analysis_context, planning_context = config_parser.get_contexts()
     extraction_settings = config_parser.get_extraction_config()
+    whoop_config = config_parser.get_whoop_config()
 
     competitions = config_parser.get_competitions()
     outside_competitions = fetch_outside_competitions_from_config(config_parser.config)
@@ -220,8 +254,29 @@ async def run_analysis_from_config(config_path: Path) -> None:
             include_metrics=True,
         )
 
-        garmin_data = extractor.extract_data(extraction_config)
+        garmin_data = asdict(extractor.extract_data(extraction_config))
         logger.info("Data extraction completed")
+
+        data_sources = ["garmin"]
+        whoop_status = "disabled"
+
+        if whoop_config.enabled:
+            whoop_extractor = WhoopRecoveryExtractor(whoop_config)
+            metrics_end = datetime.now().date()
+            metrics_start = metrics_end - timedelta(days=extraction_settings["metrics_days"])
+            logger.info("Extracting WHOOP recovery data for %s to %s", metrics_start, metrics_end)
+            try:
+                whoop_data = whoop_extractor.extract_data(metrics_start, metrics_end)
+                garmin_data = merge_whoop_into_garmin_data(garmin_data, whoop_data)
+                data_sources.append("whoop")
+                whoop_status = "success"
+                logger.info("WHOOP recovery merge completed")
+            except Exception as exc:
+                if _should_continue_without_whoop(exc):
+                    whoop_status = "fallback_to_garmin"
+                    logger.warning("Continuing with Garmin-only data after WHOOP failure: %s", exc)
+                else:
+                    raise
 
         now = datetime.now()
         plotting_enabled = extraction_settings.get("enable_plotting", False)
@@ -241,10 +296,10 @@ async def run_analysis_from_config(config_path: Path) -> None:
 
         logger.info("Running AI analysis and planning...")
 
-        result = await run_complete_analysis_and_planning(
+        result = await _run_complete_analysis_and_planning(
             user_id="cli_user",
             athlete_name=athlete_name,
-            garmin_data=asdict(garmin_data),
+            garmin_data=garmin_data,
             analysis_context=analysis_context,
             planning_context=planning_context,
             competitions=competitions,
@@ -282,6 +337,9 @@ async def run_analysis_from_config(config_path: Path) -> None:
                 "execution_id": result.get("execution_id", ""),
                 "trace_id": result.get("execution_metadata", {}).get("trace_id", ""),
                 "root_run_id": result.get("execution_metadata", {}).get("root_run_id", ""),
+                "data_sources": data_sources,
+                "whoop_enabled": whoop_config.enabled,
+                "whoop_status": whoop_status,
                 "files_generated": files_generated,
             }, indent=2, ensure_ascii=False),
             encoding="utf-8"

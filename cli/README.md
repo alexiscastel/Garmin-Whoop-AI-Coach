@@ -47,6 +47,7 @@ Top-level keys:
 - athlete: name, email
 - context: analysis, planning (freeform text; the AI will follow these constraints)
 - extraction: activities_days, metrics_days, ai_mode ("development" | "standard" | "cost_effective" | "pro")
+- whoop: optional WHOOP OAuth settings for recovery/sleep/strain overlay
 - competitions: list of {name, date (YYYY-MM-DD), race_type, priority (A/B/C), target_time (HH:MM:SS)}
 - output: directory
 - credentials: password (optional; leave empty for interactive prompt)
@@ -74,6 +75,13 @@ competitions:
 
 output:
   directory: "./data"
+
+whoop:
+  enabled: false
+  client_id: ""      # optional, or use WHOOP_CLIENT_ID
+  client_secret: ""  # optional, or use WHOOP_CLIENT_SECRET
+  redirect_uri: "http://localhost:1234"
+  token_path: "~/.whoop/garmin-ai-coach.json"
 
 credentials:
   password: ""   # leave empty to be prompted
@@ -152,6 +160,7 @@ Generated files (in output.directory, default `./data`):
   - athlete, analysis_date, competitions
   - total_cost_usd, total_tokens
   - execution_id, trace_id, root_run_id
+  - data_sources, whoop_enabled, whoop_status
   - files_generated
 
 ## Environment
@@ -160,7 +169,21 @@ Set at least one provider API key in your environment (e.g., `.env`):
 - OPENAI_API_KEY=...
 - ANTHROPIC_API_KEY=...
 - OPENROUTER_API_KEY=...
+- Optional WHOOP OAuth credentials:
+  - WHOOP_CLIENT_ID=...
+  - WHOOP_CLIENT_SECRET=...
 - Optional: LANGSMITH_API_KEY=... for observability
+
+## WHOOP Setup
+
+To overlay WHOOP recovery data:
+
+1. Create a WHOOP developer app and whitelist `http://localhost:1234` as the redirect URI.
+2. Enable the `whoop` block in your config or export `WHOOP_CLIENT_ID` / `WHOOP_CLIENT_SECRET`.
+3. Run the CLI once and complete the browser OAuth flow. The CLI will ask you to paste the full redirect URL back into the terminal.
+4. Tokens are saved to `~/.whoop/garmin-ai-coach.json` by default and reused on future runs.
+
+WHOOP is used only for recovery/sleep/readiness in v1. Garmin remains the source of truth for workouts and training load.
 
 The CLI will set `AI_MODE` from your config’s `extraction.ai_mode` (see [`python.run_analysis_from_config()`](../cli/garmin_ai_coach_cli.py:110) where `AI_MODE` is exported at [`os.environ['AI_MODE'] = ai_mode`](../cli/garmin_ai_coach_cli.py:125)).
 
@@ -177,3 +200,4 @@ Practical guidance:
 - If you ONLY set `OPENAI_API_KEY`, set `extraction.ai_mode: "standard"` (maps to OpenAI by default), or edit `stage_models` in [`services/ai/ai_settings.py`](../services/ai/ai_settings.py:24) to assign an OpenAI model (e.g., `gpt-4o`, `gpt-5-mini`, `gpt-5.2-pro`) to your preferred mode.
 - If you ONLY set `ANTHROPIC_API_KEY`, use `extraction.ai_mode: "development"` or `"cost_effective"` (default Anthropic mapping), or update the mapping accordingly.
 - For OpenRouter/DeepSeek, map your chosen mode to a model key defined in [`python.ModelSelector.CONFIGURATIONS`](../services/ai/model_config.py:22).
+- For lower token usage, prefer `ai_mode: "cost_effective"`, keep `enable_plotting: false`, and set `skip_synthesis: true` when you only need the weekly plan.

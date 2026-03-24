@@ -13,6 +13,12 @@ def extract_physiology_data(state: TrainingAnalysisState) -> dict:
         "hrv_data": physiological_markers.get("hrv", {}),
         "sleep_data": [ind["sleep"] for ind in recovery_indicators if ind.get("sleep")],
         "stress_data": [ind["stress"] for ind in recovery_indicators if ind.get("stress")],
+        "recovery_data": [ind["recovery"] for ind in recovery_indicators if ind.get("recovery")],
+        "day_strain_data": [
+            {"date": ind.get("date"), "day_strain": ind.get("day_strain")}
+            for ind in recovery_indicators
+            if ind.get("day_strain") is not None
+        ],
         "recovery_metrics": {
             "physiological_markers": physiological_markers,
             "body_metrics": garmin_data.get("body_metrics", {}),

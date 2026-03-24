@@ -11,18 +11,49 @@ context:
   analysis: |
     Ramping up for my 2026 trail running and adventure racing season. Currently focusing on base rebuilding and
     diversifying my activities with combining strength, running, and some biking.
+    
+    I have followed this plan for two weeks, and, following a threshold session on 2026-03-18 I got a mild muscle strain on my right calf. 
+    I could still run on Z1 the next day but could feel it. I then took a full day off, did a 60 minute Z3 bike on Saturday and shortened my long run to 9.5 Miles instead of 10.5 Miles.
+    I can still feel the strain today, but that's a very mild pain. Going on easy runs is a non-problem. Long runs seem to be more limited.
 
   planning: |
-    Next trail race is a 10k in 3 weeks, half marathon 3 weeks after that.
-    Priority is rebuilding aerobic base and improving run endurance.
+    ## Start Date
+    Plan should start on **Monday, 2026-03-23**. However, if needed, the plan can start with a rest day.
+    I'm thinking I will do a Z1 recovery run and a Sauna session. In the evening I'll do my mobility routine and stretching.
+    
+    ## Travel
+    I am traveling from Cleveland to Germany for work on 2026-03-29 in the afternoon. I could probably swing a short run in the morning. There I'll have a rather busy schedule but can still exercise a little. I expect jet lag and my schedule to be an issue while I'm there, yet I'll take any opportunity I have to train. I am returning on 2026-04-02.
+    
+    ## Strength training constraint
+    This plan has to work with a strength training plan provided by TrainWell.
+    The strength plan is the following:
+      - Tuesdays: whole body workout
+      - Thursdays: leg workout
+      - Saturdays: upper body workout
+    Each strength workout lasts about 45 minutes. Having a strength workout does not prevent me from running/biking.
+    My coach has given me a mobility routine that consists in hip strength, heel touch, and pistol squats. He recommended I do this as much as possible, even every day.
+    He also gave be a lower body stretching routine (for after runs) and a "deep stretching" routine that is longer but goes for the full body.
+    
+    ## General information
+    Next trail race is a 10k in 5 days, half marathon 3 weeks after that.
+    Priority is rebuilding aerobic base and improving run endurance without injuring myself (specifically that calf strain).
+    Long run is preferred on Sundays.
+    Use Miles for units.
+    
+    ## Training Zones
+    | Discipline | Base Metric                  |
+    |------------|------------------------------|
+    | Running    | LTHR ≈ 174 bpm / 7:33 min/mi |
+    | Cycling    | FTP ≈ 274W                   |
+    | Heart Rate | Max HR ≈ 193 bpm             |
 
 # Data Extraction Settings
 extraction:
   activities_days: 28      # How many days of activities to extract
   metrics_days: 56         # How many days of metrics to extract
-  ai_mode: "standard"      # Overrides .env AI_MODE for coach-cli runs; one of: "development", "standard", "cost_effective", "pro"
+  ai_mode: "cost_effective"      # Overrides .env AI_MODE for coach-cli runs; one of: "development", "standard", "cost_effective", "pro"
                            # ⚠️  WARNING: "pro" mode can incur high costs (>$10 per run depending on data volume)
-  enable_plotting: false  # Enable AI-generated plots (default: false to save costs). Set to true for visual insights.
+  enable_plotting: true   # Enable AI-generated plots (default: false to save costs). Set to true for visual insights.
   hitl_enabled: true       # Enable Human-in-the-Loop interactions - agents can ask questions during analysis (default: true)
   skip_synthesis: false    # Skip synthesis and formatter nodes (default: false). Set to true to save tokens when you only need the weekly plan.
   
@@ -39,7 +70,7 @@ competitions:
     priority: "C"              # A (highest), B, C priorities
     target_time: "00:51:45"    # HH:MM:SS format
 
-  - name: "Dirty Dash - Half Marathon trail race""
+  - name: "Dirty Dash - Half Marathon trail race"
     date: "2026-04-18"
     race_type: "Trail half Marathon"
     priority: "B"
@@ -100,16 +131,15 @@ competitions:
 
 # Output Settings
 output:
-  directory: "./data"
-
-# Optional: WHOOP Recovery Integration
-whoop:
-  enabled: false
-  client_id: ""            # Optional: falls back to WHOOP_CLIENT_ID
-  client_secret: ""        # Optional: falls back to WHOOP_CLIENT_SECRET
-  redirect_uri: "http://localhost:1234"
-  token_path: "~/.whoop/garmin-ai-coach.json"
+  directory: "./data_2"
 
 # Optional: Garmin Credentials (leave empty to use interactive login)
 credentials:
-  password: ""  # Leave empty for secure interactive input
+  password: "46Ankfsu,"  # Leave empty for secure interactive input
+
+whoop:
+  enabled: true
+  client_id: "21e82b71-0ef7-49e7-a220-b0f222afea70"
+  client_secret: "0042fa280d30826bfcb38f8f6593dd9f0b87be273393a3e51adefdad041b3ce6"
+  redirect_uri: "http://localhost:1234"
+  token_path: "~/.whoop/garmin-ai-coach.json"

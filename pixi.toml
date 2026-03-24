@@ -15,6 +15,7 @@ pre-commit = ">=4.3.0,<5"
 # Install the project itself in editable mode
 garmin-ai-coach = { path = ".", editable = true }
 garminconnect = ">=0.2.30, <0.3"
+whoopy = ">=0.3.0, <0.4"
 anthropic = ">=0.71.0, <0.72"
 pydantic = ">=2.12, <3"
 pydantic-settings = ">=2.0, <3"
