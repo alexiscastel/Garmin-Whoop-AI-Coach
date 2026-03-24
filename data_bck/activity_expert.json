@@ -1,0 +1,88 @@
+{
+  "output": {
+    "for_synthesis": {
+      "signals": [
+        "You’re executing a *lot* of “steady aerobic” running (clustered paces/power) with only a couple sessions that are truly differentiated by structure (threshold reps; micro-sprint/stride set).",
+        "Your best-executed “quality” session in the sample is the 2026-03-04 threshold workout: consistent rep pacing/power with a clear change in intensity vs warmup/cooldown.",
+        "Your “Sprint” sessions read more like *aerobic runs with strides* (very short fast surges + fairly fast recoveries), which biases the stimulus toward aerobic strength + neuromuscular touch, not pure speed development.",
+        "Longer/hillier base efforts show good external pacing stability (mile splits) but tend to drift into “vigorous” classification—your “base” stimulus outdoors often looks closer to steady/upper aerobic than easy aerobic.",
+        "Heart-rate data quality/consistency is a limiting factor for interpreting intensity: there are at least two sessions with HR values that don’t match the mechanical output (pace/power)."
+      ],
+      "evidence": [
+        "Threshold execution (2026-03-04): 2 × 1.61 km at **4:47/km (399 W, HR 155)** and **4:50/km (414 W, HR 161)** off a **2:00 recovery at 6:15/km (327 W)**; warmup ~**1.6 km @ 5:50/km (HR 132)**; cooldown ~**1.6 km @ 5:36/km (HR 155)**.",
+        "Micro-sprint/stride set (2026-03-02): **8 × ~10s** surges (0.04–0.06 km in 0.17 min) at **491–608 W** with “REST” laps of **3:00** still run at **5:27–5:40/km** with HR staying **153–160** (minimal HR drop between reps).",
+        "Hilly steady/base durability (2026-03-08): **12.18 km / 1:08:13** at **5:36/km**, **+131 m**, Avg HR **151** (max **170**), Avg Pwr **375 W** (NP **386 W**). Mile-lap paces are tightly grouped (**5:32–5:40/km**) while HR sits mostly **mid-140s to mid-150s** despite large elevation swings per lap.",
+        "Intensity clustering: multiple outdoor runs labeled “Sprint/Base” sit around **5:35–5:51/km** with Avg HR **~150–156** and Avg Pwr **~328–369 W** (e.g., 2026-02-24 5:51/km @ 155 bpm, 334 W; 2026-02-27 5:49/km @ 151 bpm, 328 W; 2026-03-07 5:37/km @ 150 bpm, 369 W).",
+        "Easy anchor appears clearest on treadmill: 2026-02-11 **6:31/km, 276 W, 142 bpm**; 2026-03-03 **5:58/km, 301 W, 143 bpm**; 2026-03-05 **6:11/km, 322 W, 137 bpm** (mechanically and cardiovascularly more “easy” than most outdoor runs).",
+        "HR anomalies / reliability flags: 2026-02-20 “Threshold” shows Avg HR **125** at **5:23/km** and **380 W** (doesn’t match surrounding run HR patterns); 2026-02-15 long run Avg HR **168** (max **195**) at **5:40/km** for **75 min**, which is unusually high for a typical aerobic long run."
+      ],
+      "implications": [
+        "Your threshold session format (mile-ish reps around 4:48–4:50/km) is a strong “system builder” for trail 10k/half marathon because it targets high-aerobic/threshold metabolism with manageable neuromuscular strain; execution quality suggests you can pace these reps well and repeat them consistently.",
+        "Your current “Sprint” implementation is best interpreted as *aerobic strength + strides*: because recoveries stay relatively quick, the workout keeps HR elevated and turns the session into a continuous aerobic load with neuromuscular spikes. That’s useful in base phases (economy + leg speed), but it’s not the same stimulus as a true speed session with full recovery.",
+        "Outdoor ‘base’ runs on rolling terrain are giving you muscular endurance + hill-specific load (good for trail racing), but they can easily become steady/tempo if you let effort drift. If the intention is aerobic base, consider capping effort on climbs (pace will vary; that’s fine) so the session stays in a lower metabolic lane.",
+        "Warmup/cooldown detail matters: your 2026-03-04 threshold warmup is functional (~10 min), but given cold/fog conditions and faster reps, a slightly more progressive warmup (more easy minutes + a few strides/drills) would likely improve rep economy and reduce “first rep shock.”",
+        "Because HR readings look inconsistent across a few key sessions, you’ll get better execution guidance by cross-checking **RPE + power + pace** (and ensuring consistent sensor setup) rather than trusting HR alone for intensity control."
+      ],
+      "uncertainty": [
+        "No HR-zone definitions/time-in-zone were provided (`hr_zones` null), so “easy vs vigorous” can’t be confirmed via zone distribution—only inferred from relative HR/power patterns.",
+        "Running power source/calibration isn’t specified (Garmin estimated vs Stryd, treadmill vs outdoor handling), so absolute watt targets should be treated as *banded heuristics*, not hard physiologic thresholds.",
+        "Most ‘Sprint’ runs (2026-02-24, 2026-02-27, 2026-03-07) don’t include lap structure here, so it’s unclear whether they contained strides/intervals or were simply named that way.",
+        "Treadmill incline/speed smoothing isn’t stated; that can materially change pace–HR–power relationships."
+      ]
+    },
+    "for_season_planner": {
+      "signals": [
+        "Your most repeatable “quality building block” in this window is controlled threshold reps (longer intervals, consistent pacing) rather than highly variable VO₂/anaerobic work.",
+        "You have an established pattern of *steady aerobic sessions with short neuromuscular spikes* (strides/micro-sprints), which is a good base-phase bridge between pure easy running and later sharpening.",
+        "Cross-training rides are executed as steady aerobic work with low HR volatility—useful for adding aerobic stimulus while limiting run-specific eccentric load.",
+        "Longer runs sometimes trend toward high cardiovascular strain for the pace (notably 2026-02-15), suggesting that “long-run as aerobic builder” may need tighter execution control to avoid turning into a de facto hard day."
+      ],
+      "evidence": [
+        "Threshold block (clear success case): 2026-03-04 includes two highly consistent 1.61 km reps at **~4:48–4:50/km** with HR topping out **~165** and power **~400–414 W**—good repeatability and pacing discipline.",
+        "Strides-in-aerobic-run block: 2026-03-02 embeds **8 × 10s** surges at **~500–600 W** into an otherwise steady run; HR stays elevated across recoveries (REST laps HR **153–160**), indicating an aerobic-dominant session with neuromuscular touches.",
+        "Steady hilly durability block: 2026-03-08 is **68 min** on rolling terrain (+131 m) with stable mile splits (mostly **5:32–5:40/km**) and HR mostly **mid-140s to mid-150s**, indicating controlled pacing under changing grade.",
+        "Aerobic cross-training stability: 1:30 indoor rides on 2026-02-22 and 2026-03-01 hold **184–195 W** with Avg HR **126–127** and very similar lap-by-lap power (~194–196 W on 2026-03-01)."
+      ],
+      "implications": [
+        "Macro-cycle building blocks that appear to “work” for you (based on execution quality): (1) *cruise/threshold intervals* (7–8 min reps) with controlled pacing; (2) *steady aerobic runs with strides* to maintain leg speed without heavy anaerobic cost; (3) *hilly steady long-ish runs* for trail-specific muscular endurance; (4) *steady indoor cycling* as an aerobic volume tool with low mechanical stress.",
+        "To make these blocks more productive over 12–24 weeks, the key opportunity is **clearer separation of intent**: your data shows a lot of sessions clustering in the same moderate-hard band outdoors. Cleaner differentiation (easy truly easy; steady truly steady; threshold truly threshold) tends to improve quality and recovery without changing total training time.",
+        "For trail/adventure racing specificity, the “hilly steady” sessions are doing the right kind of musculoskeletal work (grade changes, likely uneven footing). The main execution risk is turning them into threshold-by-accident—especially if you chase pace on climbs or keep recovery segments too quick.",
+        "Strength training pairing note (execution-level): if lower-body strength is close to key run sessions, expect altered run mechanics and higher perceived exertion at the same pace. That’s not inherently bad, but it changes which system you’re stressing (more neuromuscular/fatigue resistance, potentially less pure speed)."
+      ],
+      "uncertainty": [
+        "Without consistent HR data quality and without zone definitions, long-term intensity prescriptions should lean on repeatable markers (flat-route pace, treadmill pace, or power on a standardized route) plus RPE.",
+        "No cadence/stride length/ground contact time metrics were provided, limiting assessment of trail-specific economy, downhill braking load, or whether strength work is improving mechanics.",
+        "Course surface (road vs trail) isn’t explicitly labeled per run beyond “Lakewood,” so some intensity clustering may be surface-driven rather than pacing-choice-driven."
+      ]
+    },
+    "for_weekly_planner": {
+      "signals": [
+        "You currently show three fairly distinct *execution bands* in running power/pace that can be used to preserve session intent: (a) easy treadmill efforts, (b) steady/hilly outdoor efforts, (c) threshold reps; plus a fourth “neuromuscular spike” band for 10-second strides.",
+        "Your stride/sprint sessions are being executed with “recoveries” that are still fairly fast—this keeps HR up and shifts the stimulus away from pure speed mechanics and toward aerobic strength.",
+        "Your best quality execution happens when the session has clear structure (warmup → reps → recovery → cooldown); unstructured or mislabeled sessions tend to collapse into the moderate-hard middle.",
+        "A few HR outliers mean the weekly plan needs guardrails that do not rely on HR alone (use power/pace + RPE checks)."
+      ],
+      "evidence": [
+        "Easy treadmill anchor band: sessions like 2026-02-11 (**6:31/km, 276 W, 142 bpm**) and 2026-03-03 (**5:58/km, 301 W, 143 bpm**) represent your clearest low-strain running outputs in this window.",
+        "Steady/hilly outdoor band: 2026-03-06 (**5:44/km, 374 W**) and 2026-03-08 (**5:36/km, 375 W; +131 m**) show higher mechanical output for “base” runs—consistent with hills and/or intensity creep.",
+        "Threshold band: 2026-03-04 interval laps sit at **~399–414 W** while holding **~4:47–4:50/km** for ~7–8 minutes each (HR reaching **~165**).",
+        "Neuromuscular spikes: 2026-03-02 surges reach **~491–608 W** for ~10 seconds each, but recoveries sit at **351–383 W** (still steady) with HR not dropping below the low/mid-150s between reps.",
+        "HR reliability flags that require cross-checking: 2026-02-20 Avg HR **125** at **5:23/km / 380 W**; 2026-02-15 Avg HR **168** (max **195**) for **75 min** at **5:40/km**."
+      ],
+      "implications": [
+        "**Rule: preserve intent with “power bands” (heuristic, not absolute).** Based on your own data: *easy* often lives around **~275–320 W** (treadmill), *steady/hilly* around **~330–375 W**, *threshold reps* around **~400–415 W**, and *10s strides* can touch **~500–650 W**. Using these as guardrails helps prevent every run from landing in the same middle zone.",
+        "**Rule: base/easy sessions should feel different than steady.** If the goal is aerobic base or recovery, use the treadmill-like outputs as your reference: slower pace is acceptable if it keeps effort down; on hills, let pace slow further on climbs rather than letting power drift up into the ~370 W band.",
+        "**Building block: threshold reps (your current best-executed quality).** Keep the rep pacing as even as you did on 2026-03-04. Execution cue: the first rep should feel “controlled-hard,” not “survival,” so the second rep matches (your data shows you can do this).",
+        "**Building block: strides/micro-sprints—decide the goal, then execute accordingly.** If the goal is *neuromuscular speed/economy*: keep the 10s reps fast-but-relaxed and make the recovery easy enough for HR to noticeably drop (don’t turn the recoveries into steady tempo). If the goal is *aerobic strength with form pop*: your current “fast recoveries” are acceptable, but then you should treat the session as a hard aerobic day, not as a low-cost speed touch.",
+        "**Warmup/cooldown execution rule:** before running ~4:45–4:55/km work (or doing fast strides in cold), add enough easy running + drills/strides that the first fast rep doesn’t serve as the warmup. Your 2026-03-04 warmup (~10 min) worked, but it’s near the low end for consistent quality in cold conditions.",
+        "**Strength + run pairing rule (session quality protection):** if lower-body strength is on the same day, expect reduced peak sprint power and/or higher HR for the same pace. If a session includes true strides/sprints, do them when legs are freshest (or accept that the session becomes an aerobic run with compromised neuromuscular quality).",
+        "**HR cross-check rule:** when HR looks implausible (too low for the pace/power or extreme spikes), default to RPE + power/pace rather than adjusting intensity based on that HR trace."
+      ],
+      "uncertainty": [
+        "Exact HR caps can’t be prescribed from this dataset (no zone definitions, and HR outliers exist), so the safest near-term control is using repeatable power/pace bands + talk-test/RPE.",
+        "Power comparability across treadmill vs outdoor (and across grades) is uncertain; validate bands on a repeatable flat route or consistent treadmill settings (incline) before treating watts as “zones.”",
+        "Limited lap detail on most outdoor runs prevents deeper analysis of within-run pacing drift, downhill surges, or whether ‘Sprint’ days consistently include strides."
+      ]
+    }
+  }
+}

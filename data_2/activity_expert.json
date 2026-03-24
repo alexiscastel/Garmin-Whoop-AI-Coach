@@ -1,0 +1,103 @@
+{
+  "output": {
+    "for_synthesis": {
+      "signals": [
+        "Structured interval execution consistently strong across threshold, tempo, and sprint sessions",
+        "Right calf strain emerged post-threshold session (2026-03-18), limiting long-run capacity",
+        "Treadmill sessions show superior pacing control and HR stability vs outdoor terrain runs",
+        "Power output reliability: 300-375W sustained avg, 500-800W sprint peaks, with anomalous 849W spike",
+        "HR drift minimal during structured work despite fatigue progression in long sessions",
+        "Recovery modalities integrated systematically (yoga, walking, low-intensity cycling)"
+      ],
+      "evidence": [
+        "Threshold execution (2026-03-18): 4 cruise intervals at 4:29-4:50/km, HR 160-162 bpm, power 386-449W—consistent despite 6min intervals",
+        "Sprint sessions (2026-03-14, 03-07, 03-02, 02-27, 02-24): 100m sprints sustained 479-679W avg, peaks 587-792W, with 1min recoveries",
+        "Treadmill negative splits (2026-03-17): 9:01→8:17 across 5 miles, HR 143→156 bpm, power 353→376W—progressive intensity control",
+        "Long run degradation (2026-03-22): Laps 1-6 at 5:43-6:08/km, laps 7-10 slowed to 6:50-7:40/km despite consistent power 279-361W",
+        "Calf strain timeline: 2026-03-18 threshold session → 2026-03-19 Z1 6km treadmill tolerated → 2026-03-20 rest day → 2026-03-21 60min Z3 bike (210W) → 2026-03-22 shortened long run (15.3km vs planned 16.9km)",
+        "Strength training frequency: 11 sessions over 4 weeks, avg 48min, HR 82-106 bpm, load 2-18 TSS",
+        "Cycling substitution pattern: 5 indoor sessions, 145-210W avg, used strategically during recovery windows"
+      ],
+      "implications": [
+        "Athlete demonstrates mature execution discipline: can hold prescribed intensities across fatigue (threshold HR 160-162 for 24min cumulative work)",
+        "Neuromuscular system responds well to sprint stimuli: power peaks 674-792W without execution breakdown",
+        "Current injury management strategy effective: cross-training substitution (cycling) preserves aerobic stimulus while protecting calf",
+        "Long-run pacing vulnerability: terrain-induced power variability (lap 8: 34m elev, 7:40/km) suggests muscular endurance ceiling or pacing strategy gap",
+        "Treadmill serves as valuable controlled-stress environment: negative splits achievable vs outdoor terrain variability",
+        "Recovery architecture supports high-intensity work: yoga/walking strategically placed, strength HR controlled (88-106 bpm avg)"
+      ],
+      "uncertainty": [
+        "Max HR readings 189-191 bpm on 2026-03-02, 02-27, 02-24 likely HRM errors (occurred during cooldowns/sprints, inconsistent with Z3 work at 149-156 bpm)",
+        "Power meter calibration unclear: 849W spike (2026-03-08, lap 1) during 32m climb vs typical 300-400W range suggests sensor drift or true maximal effort",
+        "Calf strain grade/severity undefined: 'mild pain' descriptor insufficient for load tolerance prediction beyond Z1-Z2",
+        "Long-run fade pattern unclear: muscular endurance limit vs fueling vs pacing strategy (9.5-mile session cut short before true ceiling tested)",
+        "Strength training content unknown: HR/load metrics provided but exercise selection, volume, intensity schemes absent—cannot assess interference effects"
+      ]
+    },
+    "for_season_planner": {
+      "signals": [
+        "Lactate threshold work highly trainable: consistent execution at 4:29-4:50/km, HR 160-162 bpm, power 386-449W",
+        "Sprint capacity robust: 100m repeats at 479-679W avg, 587-792W peaks, with 1-3min recoveries across 6-10 reps",
+        "Long-run endurance ceiling visible: pace degradation beyond 60-75min at conversational intensity (6:00→7:40/km)",
+        "Cross-training modality hierarchy established: cycling effective substitute (145-210W, 45-90min), strength maintained (48min avg, 11 sessions/4wks)",
+        "Terrain handling adaptive: elevation sessions 43-174m tolerated but induce power/pace variability vs flat treadmill control"
+      ],
+      "evidence": [
+        "Threshold sessions across 4 weeks: 2026-03-18 (4x1mi cruise @ 4:29-4:50/km), 2026-03-04 (2x1mi tempo @ 4:47-4:50/km), 2026-03-03 (6km @ 5:58/km)—all hit prescribed HR/power zones",
+        "Sprint progression: 2026-03-14 (10x100m), 03-07 (8x100m), 03-02 (8x100m), 02-27 (6x100m), 02-24 (7x100m)—power output 439-679W avg sustained across 4-week block",
+        "Long run stress tolerance: 2026-03-15 (14.9km, 174m elev, HR 149, load 160), 03-08 (12.2km, 131m elev, HR 151, load 150), 03-22 (15.3km, 91m elev, HR 136, load 112)—load varies 112-160 for similar durations",
+        "Cycling integration: 2026-03-21 (60min, 210W, load 59), 03-01 (90min, 195W, load 70)—serves as aerobic maintenance without eccentric load",
+        "Treadmill efficiency: 2026-03-17 (8.8km, negative splits 9:01→8:17, HR 143→156), 03-19 (6km, 6:15/km, HR 135)—superior pacing vs outdoor variability"
+      ],
+      "implications": [
+        "Threshold work should anchor mesocycles: athlete can sustain 20-30min cumulative time at LT1/LT2 with 2-6min recoveries—key stimulus for HM/10M races",
+        "Sprint sessions provide neuromuscular resilience without excessive fatigue: 100m @ 500-700W, 6-10 reps, suitable for maintenance during base/build phases",
+        "Long-run progression strategy needed: current ceiling ~90min at conversational pace before mechanical breakdown—periodize these separately from intensity work",
+        "Cycling serves as strategic deload tool: 45-90min @ 145-210W preserves aerobic capacity during injury recovery or high-intensity weeks",
+        "Terrain specificity must increase for trail racing goals: current elevation exposure (43-174m per session) insufficient for Flirt with Dirt 10k (Mar 28) and Dirty Dash HM (Apr 18) preparation",
+        "Strength training volume appropriate: 48min, 2-3x/week maintains structural integrity without interference (HR 82-106 bpm, load 2-18 TSS)"
+      ],
+      "uncertainty": [
+        "VO2max work absent from 4-week dataset: no sessions >170 bpm sustained or <5:00/km for >3min intervals—gap in intensity distribution for 10k-specific fitness",
+        "Trail-specific technical skills unquantified: power variability during elevation suggests terrain handling, but descent speed, technical footing, vert gain rate not measured",
+        "Fueling strategy during long runs unknown: pace fade 5:43→7:40/km may reflect glycogen depletion vs muscular fatigue—unclear if nutritional",
+        "Strength training content unspecified: cannot assess if exercises target trail-specific demands (single-leg stability, eccentric quad/calf strength, hip power)",
+        "Injury resilience trends unclear: single calf strain post-threshold session insufficient to identify pattern—need 8-12 week view for structural vulnerability assessment"
+      ]
+    },
+    "for_weekly_planner": {
+      "signals": [
+        "Right calf strain active but Z1-Z2 tolerant; Z3+ running and long duration (>60min) compromised",
+        "Cycling substitution effective at 145-210W for 45-90min windows",
+        "Threshold sessions execute reliably on 48-72hr recovery from prior intensity",
+        "Sprint sessions (100m x 6-10) cause minimal residual fatigue when followed by 48hr easy window",
+        "Long runs degrade mechanically beyond 90min; pace fade 6:00→7:40/km observed at 60-90min mark",
+        "Treadmill provides controlled-stress environment for Z2-Z3 work during injury management"
+      ],
+      "evidence": [
+        "Calf strain timeline: 2026-03-18 threshold → 03-19 Z1 6km tolerable → 03-20 rest → 03-21 Z3 bike 60min (210W, HR 118, load 59) → 03-22 long run shortened to 15.3km with pace fade laps 7-10",
+        "Threshold recovery: 2026-03-04 tempo session (load 126) → 03-05 rest/strength → 03-06 short run (5.2km, load 71)—48hr gap before next intensity",
+        "Sprint session recovery: 2026-03-07 sprints (8x100m, load 148) → 03-08 base run (12.2km, load 150)—24hr gap tolerated",
+        "Treadmill control: 2026-03-17 (8.8km, HR 150, load 117), 03-19 (6km, HR 135, load 42), 03-12 (6.5km, HR 134, load 30)—consistent execution vs outdoor terrain variability",
+        "Cycling load distribution: 2026-03-21 (60min, 210W, load 59), 03-13 (45min, 145W, load 24), 03-11 (65min, 160W, load 36), 03-01 (90min, 195W, load 70)—range 24-70 TSS",
+        "Strength training placement: typically scheduled same day as easy run or standalone, HR 82-106 bpm, load 2-18 TSS"
+      ],
+      "implications": [
+        "**Calf protection protocol for next 7-14 days**: Limit running to Z1-Z2, max 60min duration; substitute cycling (60-90min @ 180-210W) for aerobic volume on compromised days",
+        "**Intensity session rules**: Threshold/tempo work permissible IF treadmill-based (controlled grade/pace) AND calf asymptomatic during warmup; outdoor threshold deferred until pain-free 10km run achieved",
+        "**Sprint work contraindicated short-term**: 100m repeats require explosive calf contraction—defer until 14 days pain-free or clearance from movement assessment",
+        "**Long-run rebuild strategy**: Cap at 60min until calf fully resolved; use treadmill for progressive duration (60→75→90min) before returning to outdoor terrain with elevation",
+        "**Cycling as primary aerobic driver**: Schedule 2-3x/week, 60-90min, 180-210W to maintain aerobic base while offloading calf; pair with same-day strength to consolidate load days",
+        "**Strength training continuation**: Maintain 2x/week, 45-55min, but modify to avoid calf-dominant movements (reduce/eliminate calf raises, box jumps, plyometrics) until cleared",
+        "**Race proximity constraint (Flirt with Dirt 10k, Mar 28—5 days out)**: Current calf status makes this C-priority race high-risk; consider DNS or course recon at conversational pace only"
+      ],
+      "uncertainty": [
+        "Calf strain healing trajectory unknown: 'mild pain' descriptor insufficient—need daily pain scale (0-10) during Z1, Z2, Z3 efforts plus morning stiffness rating to guide progression",
+        "Threshold session tolerance unclear: last executed 2026-03-18 pre-injury; unknown if 4x1mi cruise intervals at 4:29-4:50/km pace tolerable on treadmill vs outdoor terrain",
+        "Cycling power ceiling untested: max session 210W (2026-03-21)—unclear if 230-250W sustainable for 60min or if higher intensity triggers calf symptoms via pedal stroke mechanics",
+        "Flirt with Dirt 10k terrain profile unknown: if course features >150m elevation or technical descents, current calf status may not tolerate race-day demands regardless of pain-free Z1 running",
+        "Strength training exercise library undefined: cannot prescribe specific modifications without knowing which movements currently programmed (e.g., single-leg squats, deadlifts, lunges)"
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "output": {
+    "for_synthesis": {
+      "signals": [
+        "57-day training block shows clear three-phase pattern: volatile base-building (Jan 26–Feb 23), sustained high-load accumulation (Feb 24–Mar 8), and current stabilization (Mar 9–23)",
+        "VO₂max running declined 4 points (54→50) during peak load volatility (Feb 1–Mar 2), then recovered 2 points (50→52) as load stabilized in March",
+        "Current acute load (481 EWMA units) is 15% below chronic baseline (570), indicating absorption phase after recent high-stress period",
+        "Zero-load days increased in March (9 days vs 8 in Feb) despite higher chronic load, suggesting reactive recovery management"
+      ],
+      "evidence": [
+        "Peak daily load: 242.0 on Feb 15 (ACWR spiked to 3.64, TSB dropped to -47.8)",
+        "Monotony crisis: 2.34 on Mar 8 with Strain of 1866.8 (highest in period), indicating repetitive high-load pattern",
+        "Chronic EWMA climbed 195% over 57 days: 21.9→86.5, with steepest ramp Feb 24–Mar 8 (+44% in 13 days)",
+        "VO₂max trajectory: Running 54.0 (Feb 1)→50.0 (Mar 2)→52.0 (Mar 22); Cycling sparse with 3 measurements showing 60→58 decline",
+        "Current 7-day ACWR: 0.8 (safe zone), compared to 4 overreach events (>2.0) in February",
+        "17 zero-load days distributed across period (30% of days), clustered more in early weeks (5 in first 14 days)"
+      ],
+      "implications": [
+        "Athlete successfully absorbed a 195% chronic load increase over 8 weeks but experienced temporary VO₂max suppression and required reactive recovery",
+        "Recent calf strain (Mar 18) coincides with post-monotony recovery phase—volume absorbed but variability was insufficient",
+        "Current 0.8 ACWR and positive TSB trend (+6.4 on Mar 23) provide physiological headroom for controlled progression",
+        "VO₂max recovery (50→52) during load stabilization suggests fitness is responding to reduced volatility, not just volume",
+        "Zero-load day pattern shifted from scheduled rest to reactive recovery in March, indicating plan adherence challenges under fatigue"
+      ],
+      "uncertainty": [
+        "Zero-load days: cannot distinguish planned rest from missed training or data gaps without activity logs",
+        "Cycling VO₂max interpretation limited by sparse sampling (3 points in 57 days)",
+        "ACWR thresholds (0.8–1.5 'safe zone') are population heuristics—individual tolerance may differ",
+        "Calf strain onset (Mar 18) follows threshold session but occurs during 'safe' ACWR period—other factors (biomechanics, session structure) not visible in aggregate load metrics"
+      ]
+    },
+    "for_season_planner": {
+      "signals": [
+        "Demonstrated capacity to triple chronic load (21.9→86.5 EWMA) over 8 weeks, but required multiple volatility corrections",
+        "Safe ramp ceiling identified: chronic EWMA increases >15%/week triggered reactive recovery (occurred Feb 24–Mar 8)",
+        "Monotony tolerance exceeded at 2.34 (Mar 8)—high-load periods require greater session variability",
+        "VO₂max decline during rapid loading suggests 3-4 week lag before fitness expresses"
+      ],
+      "evidence": [
+        "Successful chronic load phases: +85% (Jan 26–Feb 23), then +56% (Feb 24–Mar 8); both required recovery insertions",
+        "Ramp rate analysis: chronic EWMA increased 3.0 units/day (Feb 24–Mar 8) vs 1.5 units/day (Jan 26–Feb 15)",
+        "Four ACWR overreach events (>2.0) all occurred during weeks with <3 training days, indicating volatile accumulation pattern",
+        "Strain exceeded 1000 on Mar 5 (1031.1) and Mar 8 (1866.8), both followed by zero-load days within 72 hours",
+        "Current chronic baseline (86.5 EWMA, 570 rolling 7d sum) represents 295% increase from training block start"
+      ],
+      "implications": [
+        "Season load architecture should target chronic EWMA progression of 5-10%/week (vs observed 15%+ spikes) to avoid fitness suppression",
+        "Establish chronic load ceiling of ~90-100 EWMA units for 4-8 week blocks, with planned recovery weeks at 60-70 EWMA to preserve VO₂max",
+        "Build monotony thresholds into meso-cycle design: limit consecutive similar sessions to 4-5 days, then insert contrast (strength, cross-training, or rest)",
+        "For May 30 A-priority race (10 weeks out), athlete can sustain current 86.5 chronic load but should not exceed 95 EWMA without taper",
+        "VO₂max recovery lag (3-4 weeks) means fitness peaks should be scheduled 4-6 weeks into stable load blocks, not during ramp phases"
+      ],
+      "uncertainty": [
+        "Individual ACWR tolerance unknown—observed 3.64 spike did not cause injury, but coincided with VO₂max decline",
+        "Chronic load ceiling (86.5 EWMA) achieved through mixed activities (running/cycling/strength)—sport-specific tolerance may differ",
+        "Monotony threshold (2.34) identified from single incident; sustainable range may be 1.2-1.8 but requires more data",
+        "Seasonal fatigue accumulation: 57-day block is too short to assess multi-month load decay or overtraining risk"
+      ]
+    },
+    "for_weekly_planner": {
+      "signals": [
+        "Current acute load (481) is 15% below chronic (570)—athlete is in recovery absorption, not building mode",
+        "Calf strain (Mar 18-present) occurred during 'safe' ACWR (0.97) but after 13-day high-monotony block",
+        "Recent zero-load days (Mar 19, 21) successfully restored TSB from -25.0 to +6.4 without collapsing chronic load",
+        "Next 5 days critical: maintaining 0.8-1.0 ACWR while calf heals will preserve race readiness for Mar 28 C-priority event"
+      ],
+      "evidence": [
+        "Current metrics (Mar 23): Acute 481, Chronic 570, ACWR 0.8, TSB +6.4, VO₂max 52 (recovered 2 points since Mar 2)",
+        "Calf strain timeline: threshold session Mar 18→Z1 run Mar 19 (symptomatic)→rest Mar 20→Z3 bike 60min Mar 21→shortened long run Mar 22 (9.5mi vs 10.5mi planned)",
+        "Pre-strain monotony: 1.55-2.34 (Mar 5-8), dropped to ~1.2-1.4 after Mar 9 corrections",
+        "Load budget to maintain ACWR 0.8-1.0: daily average 65-75 units (455-525 weekly) for next 7 days",
+        "Mar 28 race (5 days out): current chronic load (570) suggests target race load ~140-160 units (10k trail race)"
+      ],
+      "implications": [
+        "Next 28 days should hold chronic load at 80-90 EWMA range (560-630 weekly sum)—sufficient for C/B race prep without re-injury risk",
+        "Daily load ceiling: 100 units for next 7 days while calf heals, then 120-140 units for quality sessions in week of Apr 6-12 (post-race recovery)",
+        "Calf strain indicates volume tolerance exceeded despite 'safe' ACWR—limit single-session loads to <120 units until Apr 1",
+        "Insert mandatory variability: no more than 3 consecutive run-focused days; alternate with cycling (60-80 unit sessions) or strength (40-60 units)",
+        "Mar 28 race (C-priority 10k) will generate ~140-160 unit load—plan 2-3 day micro-taper (40-50 units/day) on Mar 24-26, then resume 70-80 units/day Mar 29-Apr 2",
+        "Apr 18 B-priority half marathon (26 days out): need 2-week load block (Apr 6-19) averaging 80-90 EWMA with long runs progressing 110→130→90 units (taper week)"
+      ],
+      "uncertainty": [
+        "Calf strain severity unclear from load data—if pain persists beyond Apr 1, chronic load will decay below race-ready threshold (570→480 in 10 days with conservative loading)",
+        "Zero-load days: cannot confirm if Mar 19/21 were planned or reactive—if reactive, athlete may need explicit rest-day prescription",
+        "Cross-training substitution equivalence: cycling/strength loads may not maintain running-specific readiness for Mar 28 race if overused in next 5 days",
+        "ACWR 0.8 is below 'optimal' 0.8-1.3 range—unclear if athlete is genuinely recovering or under-loading relative to chronic baseline"
+      ]
+    }
+  }
+}

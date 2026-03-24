@@ -19,36 +19,63 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-*.json
 
-# Virtual Environment
+# Tooling caches and reports
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environments
 venv/
+.venv/
 ENV/
 env/
+
+# Local environment and secrets
 .env
+.env.*
 .env.dev
+my_config.yaml
+my_training_config.yaml
+cli/my_config.yml
+cli/my_config_old.yml
 
 # Pixi
 .pixi/
-# Note: pixi.lock should be committed for reproducible builds
 
-# Roo Code
-.roo/
-
-# Intermediate AI results
-data/
-
-# IDE
+# IDE/editor
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Project specific
-.garmin_bot/
+# Runtime logs
 *.log
+logs/
 
-# OS
+# Local outputs and generated artifacts
+data/
+data_*/
+data_bck/
+data/cache/
+data/plots/
+
+# Notebook and experimental files
+*.ipynb
+notebooks/
+.ipynb_checkpoints/
+**/notebooks/
+**/test_notebooks/
+**/experimental/
+
+# Project-specific local auth/cache
+.garmin_bot/
+.roo/
+
+# OS noise
 .DS_Store
 .DS_Store?
 ._*
@@ -56,30 +83,3 @@ data/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-
-# Tooling
-.ruff_cache/
-.pytest_cache/
-.mypy_cache/
-.coverage
-coverage.xml
-htmlcov/
-
-# Logs and runtime artifacts
-logs/
-
-# Data artifacts
-data/cache/
-data/plots/
-
-# Jupyter notebooks (prevent sensitive data commits)
-*.ipynb
-notebooks/
-.ipynb_checkpoints/
-
-# Any development notebooks that might contain credentials
-**/notebooks/
-**/test_notebooks/
-**/experimental/
-my_training_config.yaml

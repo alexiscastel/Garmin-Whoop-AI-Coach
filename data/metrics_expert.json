@@ -1,0 +1,90 @@
+{
+  "output": {
+    "for_synthesis": {
+      "signals": [
+        "Chronic load baseline climbed steeply across the 57-day window, reaching period highs in early March (both EWMA chronic and Garmin-like rolling chronic).",
+        "Two clear “surge” blocks are visible (mid-February and early March), each marked by elevated ramp rate and uncoupled ACWR (acute relative to the prior-week baseline).",
+        "The most recent high week (ending 2026-03-08) produced the peak values for acute load, chronic load, monotony, and strain; 2026-03-09 (0 load) reduced short-term metrics but rolling 7d/28d measures remain elevated.",
+        "Training stimulus has been volatile: frequent true-zero days interspersed with large single-day loads, producing large day-to-day deltas and periodic spike indicators.",
+        "VO2 Max estimates show a step-down in running from 54 → ~51 in mid-February and relative stability at ~50–51 since; cycling VO2 Max has only 3 samples and shows a small drop (60 → 58)."
+      ],
+      "evidence": [
+        "Chronic EWMA (28d) rose from ~25.0 on 2026-01-12 to a max of 77.6 on 2026-03-08 (then 72.2 on 2026-03-09 after a 0-load day).",
+        "Garmin-like chronic baseline (chronic_28d_avg) increased from 240.8 on 2026-02-01 → 357.0 on 2026-02-28 → 483.0 on 2026-03-09 (period max), indicating a rapidly rising “weekly-load baseline.”",
+        "Weekly load (acute_7d_sum) peaks: 672.1 on 2026-02-15 and a higher max 798.0 on 2026-03-08 (then 624.8 on 2026-03-09).",
+        "Spike indicators (uncoupled): acwr_uncoupled peaked at 3.64 on 2026-02-15; it returned to ~2.0+ in early March (2.03 on 2026-03-02; 2.07 on 2026-03-08). Weekly uncoupled ACWR (acwr_7d28d_uncoupled) peaked at 2.63 on 2026-02-15 and 2.19 on 2026-03-08.",
+        "Monotony/strain: monotony_7d reached 2.34 and strain_7d 1866.8 on 2026-03-08 (period highs). For comparison, the prior big surge day 2026-02-15 had monotony_7d 1.19 and strain_7d 803.0.",
+        "TSB (chronic_ewma − acute_ewma) extremes: most negative -52.9 on 2026-01-14; large negative again -47.8 on 2026-02-15; recent -33.7 on 2026-03-08 improving to -11.3 on 2026-03-09.",
+        "Volatility markers: 14/57 days had daily_load = 0.0 (~25% of days). Largest single-day jump +220.5 (2026-02-14 → 2026-02-15) and largest drop -242.0 (2026-02-15 → 2026-02-16).",
+        "Running VO2 Max samples: 54.0 on 2026-01-12/2026-02-01/2026-02-06, then 51.0 from 2026-02-13 onward (with one 50.0 on 2026-02-27 and 2026-03-02), latest 51.0 on 2026-03-08. Cycling VO2 Max: 60.0 (2026-02-22, 2026-02-25) → 58.0 (2026-03-01).",
+        "Training status snapshot shows VO2 max 51.0 dated 2026-03-08 and an undated acute/chronic load of 629/503 with ACWR 1.2; magnitude is consistent with nearby acute_7d_sum 624.8 (2026-03-09) and chronic_28d_avg 483.0 (2026-03-09)."
+      ],
+      "implications": [
+        "Quantitatively, base rebuilding is real and substantial: both chronic baselines (EWMA and rolling-sum) are at period highs by 2026-03-08/2026-03-09.",
+        "The biggest “stress reality” signal in early March is not just high weekly load, but the combination of high weekly load + high monotony, which is what drives the record strain value on 2026-03-08.",
+        "Coupled metrics (e.g., acwr_7d28d) can visually look less extreme than uncoupled versions during surge weeks; uncoupled ACWR provides a clearer spike flag when weekly load ramps quickly relative to the prior-week baseline.",
+        "VO2 Max estimates are currently behaving more like step changes + plateau (running ~51 since 2026-02-13) rather than a smooth rising trend; interpretation should be cautious given sparse sampling and algorithm dependence."
+      ],
+      "uncertainty": [
+        "training_status.acute_training_load fields (acute_load/chronic_load/acwr) have no date; alignment is inferred from similarity to 2026-03-09 rolling-sum metrics, but the snapshot could be from a nearby date.",
+        "Early-window uncoupled ACWR outliers (e.g., 2026-01-12/2026-01-13) are dominated by an extremely low baseline (chronic_uncoupled ~0.8) and are not comparable to later “steady-baseline” ACWR values.",
+        "VO2 Max sampling is irregular (running: 14 points; cycling: 3 points) with gaps up to 20 days; short-term changes may reflect estimation noise or context rather than a stable underlying trend.",
+        "monotony_7d = 0.00 and strain_7d = 0.0 on 2026-01-23–2026-01-25 conflicts with non-zero daily_load/acute_7d_sum on 2026-01-25, suggesting a calculation edge-case when recent loads are near-zero."
+      ]
+    },
+    "for_season_planner": {
+      "signals": [
+        "The athlete’s load capacity (as represented by chronic baselines) is rising quickly; by early March the system is operating at the highest chronic levels in this dataset.",
+        "Load progression has been achieved via pronounced surges (notably 2026-02-11→2026-02-17 and 2026-03-02→2026-03-08) rather than a smooth ramp, producing repeated spike flags in uncoupled ACWR and ramp_7d.",
+        "Recent strain is being driven disproportionately by monotony rising above 2.0 (a structural signal about how load is distributed across days), not only by weekly totals.",
+        "The data show that deload “resets” can rapidly normalize spike indicators (e.g., late Feb), suggesting that planned oscillation is already part of the athlete’s pattern (intentional or not)."
+      ],
+      "evidence": [
+        "Chronic_28d_avg trajectory (Garmin-like baseline of weekly load): 240.8 (2026-02-01) → 303.7 (2026-02-21) → 357.0 (2026-02-28) → 483.0 (2026-03-09). This is ~2× growth from early February to early March.",
+        "EWMA chronic (28d) increased from ~28–35 range in early February (e.g., 28.8 on 2026-02-08; 35.0 on 2026-02-09) to 77.6 by 2026-03-08.",
+        "Ramp rate (ramp_7d) exceeded ~15 multiple times during surge phases: 16.9 (2026-02-11), 28.1 (2026-02-15), 21.7 (2026-02-17), 18.1 (2026-03-02), 17.6 (2026-03-04), 18.2 (2026-03-05), 19.7 (2026-03-07), 23.9 (2026-03-08).",
+        "Uncoupled ACWR (acute vs baseline from 7 days prior) hit high values during surges: 3.64 (2026-02-15), 2.03 (2026-03-02), 2.07 (2026-03-08). Uncoupled weekly ACWR (acwr_7d28d_uncoupled) similarly peaked at 2.63 (2026-02-15) and 2.19 (2026-03-08).",
+        "Strain escalation is largely monotony-driven in early March: strain_7d 1866.8 on 2026-03-08 with monotony_7d 2.34, versus strain_7d 803.0 on 2026-02-15 with monotony_7d 1.19 (weekly load was high on both dates: acute_7d_sum 798 vs 672).",
+        "“Deload signature” example: 2026-02-22 to 2026-02-23 acute_7d_sum = 219.4 with coupled ACWR ~0.70–0.71 and TSB positive (4.6 to 12.0), coinciding with a clear step-down from the prior high block."
+      ],
+      "implications": [
+        "Treat the current March baseline (chronic_28d_avg ~480; EWMA chronic ~72–78) as a meaningful new platform for the next 12–24 weeks; future progression will be more sustainable if it builds from this platform rather than repeatedly doubling the prior-week baseline (uncoupled ACWR ≥ ~2).",
+        "The most limiting structural signal is the combination of: high ramp_7d + high uncoupled ACWR + high monotony (≥2). When all three align (e.g., 2026-03-07 to 2026-03-08), strain reaches extreme values for this dataset.",
+        "Given the competition calendar (C race 2026-03-28; B race 2026-04-18; A race 2026-05-30), the load architecture opportunity is to prioritize consistency and controlled oscillation (planned deloads) so that chronic baselines remain high without relying on “shock weeks” that force large recovery troughs.",
+        "From a planning perspective, use uncoupled metrics (acwr_uncoupled and acwr_7d28d_uncoupled) as primary spike detectors, because coupled metrics can understate surge magnitude when the chronic baseline is being pulled upward by the surge itself."
+      ],
+      "uncertainty": [
+        "This dataset covers 57 continuous days; it’s enough to detect patterns but not enough to confidently define an individual long-term “maximum sustainable” chronic load ceiling across the whole season.",
+        "Garmin load units are device- and ecosystem-dependent; if activity types or recording behaviors change (e.g., more cycling/strength logged vs not logged), year-to-year comparisons of absolute load can shift.",
+        "Long-term VO2 Max trend has apparent outliers (e.g., running 66 on 2025-11-17; cycling 68 on 2025-10-26) and large sampling gaps, limiting confidence in using VO2 Max trends as a season-long KPI from this data alone."
+      ]
+    },
+    "for_weekly_planner": {
+      "signals": [
+        "You are immediately post a very high-load, high-strain week ending 2026-03-08; 2026-03-09 (0 load) reduced acute load and improved TSB, but 7d/28d rolling metrics remain elevated by design.",
+        "Short-term spike indicators are improving day-over-day (uncoupled ACWR fell from ~2.07 on 2026-03-08 to 1.35 on 2026-03-09), but the last 7 days still represent an above-baseline week (coupled ACWR 1.29; uncoupled weekly ACWR 1.65).",
+        "Monotony-driven strain is the key near-term guardrail: monotony reached >2.0 on 2026-03-07 and 2026-03-08 and strain exceeded 1500 on both days, which is exceptional relative to the rest of the dataset.",
+        "The load system is still in “build mode” (chronic_28d_avg continuing to rise to a max on 2026-03-09), meaning even steady training can keep baseline rising as low values roll out of the 28-day window."
+      ],
+      "evidence": [
+        "Latest day (2026-03-09): daily_load 0.0; acute_ewma 83.5; chronic_ewma 72.2; TSB -11.3; ramp_7d 10.3; acute_7d_sum 624.8; chronic_28d_avg 483.0; coupled ACWR 1.29; monotony_7d 1.60; strain_7d 998.6; acwr_uncoupled 1.35; acwr_7d28d_uncoupled 1.65.",
+        "Peak stress day (2026-03-08): acute_7d_sum 798.0 (period max); chronic_28d_avg 471.8; coupled ACWR 1.69; monotony_7d 2.34 (period max); strain_7d 1866.8 (period max); TSB -33.7; ramp_7d 23.9; acwr_uncoupled 2.07; acwr_7d28d_uncoupled 2.19.",
+        "Recent surge ramp context: ramp_7d stayed elevated 2026-03-02→2026-03-08 (18.1, 11.7, 17.6, 18.2, 10.0, 19.7, 23.9), indicating persistent fast growth in EWMA chronic over that week.",
+        "Deload comparison point (late February): 2026-02-22 to 2026-02-23 acute_7d_sum 219.4 with coupled ACWR ~0.70 and TSB positive (4.6 to 12.0), showing what a “low-pressure” microcycle looks like in this dataset.",
+        "Training status snapshot magnitude: acute_load 629 / chronic_load 503 / ACWR 1.2 (undated) is consistent with the current rolling load magnitude (acute_7d_sum 624.8; chronic_28d_avg 483.0 on 2026-03-09), suggesting the athlete is currently above baseline but not at the extreme spike seen on 2026-03-08."
+      ],
+      "implications": [
+        "Acute-load guardrail (near-term): avoid repeating an ~800 acute_7d_sum week immediately (the 2026-03-08 peak). A pragmatic ceiling for the next 7–14 days is keeping acute_7d_sum roughly ≤ ~650–700 unless there is a deliberate overload objective; this corresponds to ~1.3–1.45× the current chronic_28d_avg (483 on 2026-03-09).",
+        "Spike indicator limits: for steadier progression, target acwr_uncoupled (EWMA) and acwr_7d28d_uncoupled (rolling sums) to spend most days <~1.6. Values approaching/above ~2.0 (seen 2026-03-02 and 2026-03-08; and strongly on 2026-02-15) indicate acute load is ~2× the baseline from one week earlier.",
+        "Ramp-rate limiter: ramp_7d is currently 10.3 (2026-03-09) after peaking at 23.9 (2026-03-08). Keeping ramp_7d generally in the ~0–10 band would reduce repeated “fast-growth” weeks (which align with the highest strain/most negative TSB periods in this dataset).",
+        "Monotony/strain limiter: prioritize keeping monotony_7d <~2.0 and strain_7d <~1000 as structural constraints. The dataset’s single largest strain spike (1866.8 on 2026-03-08) was driven by monotony 2.34 plus a very high weekly load; bringing monotony down is the most leverage-efficient way to avoid repeating that peak strain.",
+        "Readiness proxy (load-only): when TSB stays below about -25 (e.g., 2026-03-02, 2026-03-04, 2026-03-07, 2026-03-08; and 2026-02-15), you are in the dataset’s highest load-pressure zone. For the 2026-03-28 C race, trending TSB toward neutral (closer to 0) at some point before the event would indicate reduced short-term load pressure (without specifying how to achieve it)."
+      ],
+      "uncertainty": [
+        "Rolling-window metrics (7d sums, monotony, strain, uncoupled 7d/28d) will remain elevated for several days even if daily load is reduced; interpret changes over multi-day windows, not single days.",
+        "No recovery-context metrics (sleep, HRV, subjective readiness) are included here, so guidance is limited to load-shape guardrails rather than a full readiness assessment.",
+        "training_status acute/chronic load is undated; it is treated as “current-ish” based on magnitude matching, but exact alignment to a specific day cannot be guaranteed."
+      ]
+    }
+  }
+}

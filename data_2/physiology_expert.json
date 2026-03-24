@@ -1,0 +1,96 @@
+{
+  "output": {
+    "for_synthesis": {
+      "signals": [
+        "Progressive parasympathetic shift: overnight HRV rose 11% from week 1 (46.6) to weeks 6-8 (51.0-51.9), concurrent with RHR declining 3.4 bpm (46.4→43.0)",
+        "Sleep architecture stable but fragile: mean score 81.9, but deep sleep averaging only 1.30h (17.8%) with frequent deficit episodes <1h",
+        "Acute calf strain (2026-03-18 threshold session) occurred during period of elevated sympathetic activity: RHR 50 on 2026-03-20, no sleep data 2026-03-18 to 2026-03-23",
+        "Stress tolerance improved: high-stress days (avg >35) declined from 3 episodes in weeks 1-4 to zero in weeks 6-8",
+        "Body composition trending downward: -0.73 kg over 20 days (79.56→78.83 kg), potentially affecting tissue repair capacity"
+      ],
+      "evidence": [
+        "HRV trajectory: 46.6 (week 1) → 46.0 (week 2) → 47.9 (week 4) → 51.9 (week 6) → 51.0 (week 7-8); peak values 57 on 2026-03-07 and 2026-03-13",
+        "RHR trajectory: 46.4 (week 1) → 45.9 (week 2) → 44.9 (week 4) → 44.7 (week 6) → 43.9 (week 7) → 43.0 (week 8); sustained ≤44 bpm for 21 of 48 nights",
+        "Deep sleep deficits: 0.67h (2026-02-02), 0.70h (2026-02-14), 0.88h (2026-02-27), 0.98h (2026-02-08), 1.00h (2026-03-10) — 5 episodes <1h",
+        "Sleep fragmentation spikes: 70 restless moments (2026-02-01), 69 (2026-03-08), 63 (2026-02-15, 2026-03-16) vs. median 42",
+        "Worst sleep quality: score 72 (2026-01-31) with HRV 37, RHR 49, stress avg 35; score 73 (2026-03-08) with 1.28h awake",
+        "Injury context: threshold session 2026-03-18 → calf strain → no sleep data 2026-03-18 to 2026-03-23 (6 consecutive days missing)",
+        "Post-injury readiness: 2026-03-19 Z1 run tolerated, 2026-03-21 60min Z3 bike, 2026-03-22 9.5mi long run (curtailed from 10.5mi)",
+        "Weight loss: 79.56 kg (2026-02-22) → 79.38 kg (2026-03-07) → 78.83 kg (2026-03-14), -0.92% over 20 days"
+      ],
+      "implications": [
+        "Adaptation trajectory is positive: improving autonomic balance indicates successful absorption of training stress over 8-week base period",
+        "Deep sleep insufficiency limits tissue repair: <1h deep sleep episodes correlate with incomplete neuromuscular recovery, creating injury vulnerability window",
+        "Calf strain timing suggests local tissue failure rather than systemic overload: HRV/RHR trends were favorable pre-injury, implicating acute biomechanical or neuromuscular fatigue",
+        "Current mild calf pain with Z1 tolerance suggests Grade 1 strain with healing in progress; RHR 52 (2026-03-23) vs. recent lows of 40-43 may indicate residual inflammation",
+        "Weight loss during base building may compromise connective tissue resilience and recovery substrate availability",
+        "Missing sleep data during injury week prevents assessment of inflammatory response and healing quality"
+      ],
+      "uncertainty": [
+        "No HRV baseline data available — cannot determine if current values (48.4 mean, 51-57 recent) represent optimal range or ceiling for this athlete",
+        "Hydration intake reported as 0.0L on all days — sweat loss data (0.33-1.77L) unreliable for assessing fluid balance impact on recovery",
+        "Missing 6 consecutive days of sleep data during injury period (2026-03-18 to 2026-03-23) — cannot assess inflammatory response, pain-disrupted sleep, or HRV reaction to tissue damage",
+        "No VO2 max data — cannot contextualize cardiovascular adaptation against aerobic capacity changes",
+        "Only 3 weight measurements over 57 days — insufficient to distinguish purposeful body composition change from dehydration or measurement error"
+      ]
+    },
+    "for_season_planner": {
+      "signals": [
+        "Autonomic reserve expanding: 11% HRV increase and 3.4 bpm RHR decline over 8 weeks indicates successful base adaptation with capacity for progressive loading",
+        "Injury vulnerability persists despite systemic readiness: calf strain occurred during favorable HRV/RHR phase, suggesting structural/neuromuscular weak points independent of aerobic fitness",
+        "Sleep architecture ceiling: consistent 17.8% deep sleep (vs. optimal 20-25%) may limit high-intensity training block tolerance over long season",
+        "Stress resilience improving: elimination of high-stress days (avg >35) in recent weeks suggests better recovery between sessions"
+      ],
+      "evidence": [
+        "Parasympathetic trend: HRV 46.6 (Jan) → 51.9 (early Mar) → 51.0 (mid-Mar); RHR 46.4 (Jan) → 43.0 (mid-Mar)",
+        "Deep sleep distribution: mean 1.30h (17.8%) across 48 nights; only 8 nights achieved ≥1.5h; no nights reached 2.5h (optimal)",
+        "Injury timing: threshold session 2026-03-18 preceded calf strain; no prior systemic warning (HRV 57 on 2026-03-13, RHR 44)",
+        "High-quality sleep frequency: only 15 nights scored ≥85 over 57-day period (31% of measured nights)",
+        "Weight trajectory: -0.92% over 20 days during base period"
+      ],
+      "implications": [
+        "Macro-cycle capacity: current autonomic profile supports progression into build phases for Priority A races (2026-05-30 Adventure Race, 2026-09-05 Half Marathon)",
+        "Injury risk management required: musculoskeletal resilience lags cardiovascular adaptation — long-term plan must integrate progressive strength/plyometric loading and movement quality work",
+        "Sleep quality ceiling may constrain intensity blocks: insufficient deep sleep (17.8% vs. 20-25% optimal) limits growth hormone secretion and tissue remodeling during high-load phases",
+        "Multi-discipline loading (run/bike/strength) appears sustainable: stress recovery patterns improved over 8 weeks despite activity diversification",
+        "Body composition loss during base period suggests energy availability may be marginal — risk of RED-S if caloric deficit continues into build phases"
+      ],
+      "uncertainty": [
+        "Unknown HRV ceiling: current 51-57 range may represent genetic maximum or untapped potential — no baseline reference available",
+        "Calf strain etiology unclear: biomechanical flaw, cumulative fatigue, or acute overload? Cannot assess tissue quality trends without hydration/nutrition data",
+        "Sleep architecture plasticity unknown: can deep sleep % improve with training periodization, or is 17.8% this athlete's physiological limit?",
+        "No VO2 max trend data — cannot confirm if aerobic capacity is rising proportionally to autonomic adaptation"
+      ]
+    },
+    "for_weekly_planner": {
+      "signals": [
+        "Moderate readiness with healing constraint: RHR 52 bpm (2026-03-23) elevated vs. recent baseline (40-43), indicating residual inflammation from calf strain",
+        "Z1 running tolerated, Z3 cycling tolerated, but long run distance sensitivity suggests eccentric loading limitation",
+        "No current sleep data (missing 2026-03-18 to 2026-03-23): cannot assess recent sleep quality or HRV response to injury",
+        "Pre-injury autonomic state was favorable: HRV 51-57 range and RHR 43-44 in week prior to strain"
+      ],
+      "evidence": [
+        "Current RHR 52 vs. 7-day pre-injury average of ~44 (week of 2026-03-09: 43.9 avg) = +8 bpm elevation",
+        "User report: 'mild muscle strain right calf' post-threshold session 2026-03-18; 'very mild pain' on 2026-03-23; 'easy runs non-problem, long runs more limited'",
+        "Post-injury activity: Z1 run (2026-03-19), rest day (2026-03-20), Z3 bike 60min (2026-03-21), 9.5mi long run vs. planned 10.5mi (2026-03-22)",
+        "Most recent sleep data: 2026-03-17 score 87, HRV 51, RHR 43 — strong pre-injury baseline",
+        "Last recorded HRV peak: 57 on 2026-03-13, indicating high readiness 5 days pre-injury"
+      ],
+      "implications": [
+        "Next 7-14 days: MODERATE readiness corridor — aerobic system ready, but musculoskeletal healing limits eccentric/explosive work",
+        "Intensity gate: threshold/tempo work carries re-injury risk until RHR returns to 43-45 range; prioritize Z1-Z2 volume and Z3 cycling (low-eccentric)",
+        "Long run modification: continue capping distance at pain-free threshold (9.5mi tolerated); avoid >10% weekly distance increase until RHR normalizes",
+        "Strength training: avoid calf-loading plyometrics/hill repeats; substitute with upper body, core, and concentric-focused leg work",
+        "Next 14-28 days: If RHR returns to 43-45 and sleep quality rebounds (score >80, HRV >48), can resume progressive loading toward 2026-03-28 10k race (5 days out)",
+        "Race readiness by 2026-03-28: physiologically feasible IF RHR <45 by 2026-03-26 and calf pain-free during Z2 efforts; otherwise defer to C-priority status and use as fitness check"
+      ],
+      "uncertainty": [
+        "Cannot assess current sleep quality or HRV — critical data missing since injury onset (2026-03-18 to 2026-03-23)",
+        "RHR elevation (52) may reflect inflammation, dehydration, or stress; no hydration data to differentiate",
+        "Calf healing timeline unknown: Grade 1 strains typically resolve in 7-14 days, but individual tissue repair rate unknown without biomarkers",
+        "No visibility into current deep sleep or sleep fragmentation — if disrupted by pain, healing will lag",
+        "First race (2026-03-28) only 5 days away — insufficient time to confirm full healing unless RHR drops rapidly"
+      ]
+    }
+  }
+}
