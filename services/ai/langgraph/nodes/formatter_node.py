@@ -6,6 +6,7 @@ from services.ai.langgraph.state.training_analysis_state import TrainingAnalysis
 from services.ai.model_config import ModelSelector
 from services.ai.utils.retry_handler import AI_ANALYSIS_CONFIG, retry_with_backoff
 
+from .prompt_components import get_available_plot_references_context
 from .tool_calling_helper import extract_text_content
 
 logger = logging.getLogger(__name__)
@@ -38,6 +39,7 @@ Return ONLY the complete HTML document."""
 FORMATTER_PLOT_INSTRUCTIONS = """
 ## Plot Integration
 - **Preserve**: Keep `[PLOT:plot_id]` references EXACTLY as written.
+- **Restrict**: Do NOT create any new `[PLOT:...]` references.
 - **Layout**: Treat them as major visual blocks (full-width).
 - **Spacing**: Ensure CSS provides vertical space (~500px) for the interactive charts that will replace them."""
 
@@ -47,10 +49,16 @@ async def formatter_node(state: TrainingAnalysisState) -> dict[str, list | str]:
 
     try:
         plotting_enabled = state.get("plotting_enabled", False)
+        available_plot_ids = sorted(set(state.get("available_plots", [])))
+        plot_reference_context = (
+            get_available_plot_references_context(available_plot_ids)
+            if plotting_enabled else ""
+        )
         logger.info(
-            "Formatter node: Plotting %s - %s plot integration instructions",
+            "Formatter node: Plotting %s - %s plot integration instructions (%s available plots)",
             "enabled" if plotting_enabled else "disabled",
             "including" if plotting_enabled else "no",
+            len(available_plot_ids),
         )
 
         agent_start_time = datetime.now()
@@ -63,6 +71,7 @@ async def formatter_node(state: TrainingAnalysisState) -> dict[str, list | str]:
                 {"role": "user", "content": (
                     FORMATTER_USER_PROMPT_BASE.format(synthesis_result=synthesis_result)
                     + (FORMATTER_PLOT_INSTRUCTIONS if plotting_enabled else "")
+                    + plot_reference_context
                 )},
             ])
             return extract_text_content(response)

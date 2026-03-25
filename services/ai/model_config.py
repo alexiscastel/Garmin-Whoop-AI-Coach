@@ -125,10 +125,15 @@ class ModelSelector:
             base_url="https://api.anthropic.com",
             openrouter_name="anthropic/claude-opus-4.1",
         ),
-        "claude-3-haiku": ModelConfiguration(
-            name="claude-3-haiku-20240307",
+        "claude-haiku-4.5": ModelConfiguration(
+            name="claude-haiku-4-5",
             base_url="https://api.anthropic.com",
-            openrouter_name="anthropic/claude-3-haiku",
+            openrouter_name="anthropic/claude-haiku-4.5",
+        ),
+        "claude-3-haiku": ModelConfiguration(
+            name="claude-haiku-4-5",
+            base_url="https://api.anthropic.com",
+            openrouter_name="anthropic/claude-haiku-4.5",
         ),
         # DeepSeek Models
         "deepseek-chat": ModelConfiguration(

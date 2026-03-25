@@ -9,7 +9,7 @@
 ## AI & LLM Providers
 
 ### Supported Models
-- **Anthropic Claude** - claude-sonnet-4, claude-opus-4, claude-3-haiku (with extended thinking support)
+- **Anthropic Claude** - claude-sonnet-4, claude-opus-4, claude-haiku-4.5 (with extended thinking support)
 - **OpenAI** - gpt-5, gpt-5.2-pro, gpt-5-mini, gpt-5-search, gpt-5.2-pro-search (with web search), gpt-4o, o1, o3, o4-mini
 - **OpenRouter/DeepSeek** - deepseek-chat, deepseek-r1, deepseek-v3.2-exp (with reasoning support)
 

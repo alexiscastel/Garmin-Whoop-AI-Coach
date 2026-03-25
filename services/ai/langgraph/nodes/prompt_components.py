@@ -64,8 +64,29 @@ def get_plotting_instructions(agent_name: str) -> str:
     return f"""
 ## Visualization Rules
 - **Constraint**: Create plots ONLY for unique insights not visible in standard Garmin reports. Max 2 plots.
-- **Reference**: You MUST reference each plot EXACTLY ONCE in your text using `[PLOT:{agent_name}_TIMESTAMP_ID]`.
+- **Tool Output**: When the plotting tool succeeds, it returns the exact `plot_id` and reference syntax.
+- **Reference**: You MUST reference each created plot EXACTLY ONCE using the exact returned tag `[PLOT:<plot_id>]`.
+- **Never Invent IDs**: Do NOT make up semantic or placeholder IDs such as `[PLOT:training_load_overview]` or `[PLOT:{agent_name}_TIMESTAMP_ID]`.
 - **Placement**: Place the reference where it best supports your analysis. Do not repeat it."""
+
+
+def get_available_plot_references_context(available_plot_ids: list[str]) -> str:
+    unique_plot_ids = sorted(set(available_plot_ids))
+
+    if not unique_plot_ids:
+        return """
+## Valid Plot References
+- No plots are currently available.
+- Do NOT invent any new `[PLOT:...]` references.
+"""
+
+    formatted_ids = "\n".join(f"- `{plot_id}`" for plot_id in unique_plot_ids)
+    return f"""
+## Valid Plot References
+- Use ONLY these exact plot IDs if you include plot references.
+- Never invent descriptive placeholders such as `[PLOT:training_load_overview]`.
+{formatted_ids}
+"""
 
 
 def get_hitl_instructions(agent_name: str) -> str:

@@ -191,7 +191,7 @@ Provider selection depends on AI mode mapping:
 - Default mapping in [`services/ai/ai_settings.py`](../services/ai/ai_settings.py:24) within [`python.AISettings()`](../services/ai/ai_settings.py:19):
   - `standard` → `gpt-5` / `gpt-5-search` (OpenAI, with web search for experts/planners)
   - `development` → `claude-4` (Anthropic)
-  - `cost_effective` → `claude-3-haiku` (Anthropic)
+  - `cost_effective` → `claude-haiku-4.5` (Anthropic)
   - `pro` → `gpt-5-search` / `gpt-5.2-pro-search` (OpenAI, with gpt-5.2-pro-search for experts and planners)
     - ⚠️ **WARNING**: PRO mode can incur high costs (>$10 per run depending on data volume and configuration)
 - Model IDs and providers are declared in [`python.ModelSelector.CONFIGURATIONS`](../services/ai/model_config.py:22), and the provider API key is auto-selected in [`python.ModelSelector.get_llm()`](../services/ai/model_config.py:61).

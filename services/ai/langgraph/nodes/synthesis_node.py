@@ -6,9 +6,9 @@ from services.ai.ai_settings import AgentRole
 from services.ai.langgraph.state.training_analysis_state import TrainingAnalysisState
 from services.ai.langgraph.utils.output_helper import extract_expert_output
 from services.ai.model_config import ModelSelector
-from services.ai.tools.plotting import PlotStorage
 from services.ai.utils.retry_handler import AI_ANALYSIS_CONFIG, retry_with_backoff
 
+from .prompt_components import get_available_plot_references_context
 from .tool_calling_helper import handle_tool_calling_in_node
 
 logger = logging.getLogger(__name__)
@@ -28,6 +28,8 @@ Create comprehensive, actionable insights by synthesizing multiple data streams.
 SYNTHESIS_PLOT_INSTRUCTIONS = """
 ## Plot Integration
 - Include plot references as `[PLOT:plot_id]` in your text.
+- Use only real plot IDs that already exist.
+- Never invent placeholder IDs such as `[PLOT:training_load_overview]`.
 - These will become interactive charts."""
 
 SYNTHESIS_USER_PROMPT_BASE = """Synthesize the expert analyses into a comprehensive athlete report.
@@ -72,13 +74,18 @@ async def synthesis_node(state: TrainingAnalysisState) -> dict[str, list | str]:
     logger.info("Starting synthesis node")
 
     try:
-        plot_storage = PlotStorage(state["execution_id"])
         plotting_enabled = state.get("plotting_enabled", False)
+        available_plot_ids = sorted(set(state.get("available_plots", [])))
+        plot_reference_context = (
+            get_available_plot_references_context(available_plot_ids)
+            if plotting_enabled else ""
+        )
 
         logger.info(
-            "Synthesis node: Plotting %s - %s plot integration instructions",
+            "Synthesis node: Plotting %s - %s plot integration instructions (%s available plots)",
             "enabled" if plotting_enabled else "disabled",
             "including" if plotting_enabled else "no",
+            len(available_plot_ids),
         )
 
         agent_start_time = datetime.now()
@@ -88,7 +95,9 @@ async def synthesis_node(state: TrainingAnalysisState) -> dict[str, list | str]:
                 llm_with_tools=ModelSelector.get_llm(AgentRole.SYNTHESIS).bind_tools([]),
                 messages=[
                     {"role": "system", "content": (
-                        SYNTHESIS_SYSTEM_PROMPT_BASE + (SYNTHESIS_PLOT_INSTRUCTIONS if plotting_enabled else "")
+                        SYNTHESIS_SYSTEM_PROMPT_BASE
+                        + (SYNTHESIS_PLOT_INSTRUCTIONS if plotting_enabled else "")
+                        + plot_reference_context
                     )},
                     {"role": "user", "content": (
                         SYNTHESIS_USER_PROMPT_BASE.format(
@@ -99,7 +108,9 @@ async def synthesis_node(state: TrainingAnalysisState) -> dict[str, list | str]:
                             competitions=json.dumps(state["competitions"], indent=2),
                             current_date=json.dumps(state["current_date"], indent=2),
                             style_guide=state["style_guide"],
-                        ) + (SYNTHESIS_USER_PLOT_INSTRUCTIONS if plotting_enabled else "")
+                        )
+                        + (SYNTHESIS_USER_PLOT_INSTRUCTIONS if plotting_enabled else "")
+                        + plot_reference_context
                     )},
                 ],
                 tools=[],
@@ -123,7 +134,7 @@ async def synthesis_node(state: TrainingAnalysisState) -> dict[str, list | str]:
                     "timestamp": datetime.now().isoformat(),
                 }
             ],
-            "available_plots": plot_storage.list_available_plots(),
+            "available_plots": available_plot_ids,
         }
 
     except Exception as exc:
